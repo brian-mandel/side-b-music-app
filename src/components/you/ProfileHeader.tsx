@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Share2, Pencil, Check, X } from "lucide-react";
+import { Share2, Pencil, Check, X, Settings } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { UserAvatar } from "@/components/UserAvatar";
@@ -74,9 +80,30 @@ export function ProfileHeader({ user, onBioUpdate }: ProfileHeaderProps) {
           </p>
         </div>
 
-        <Button variant="secondary" size="icon">
-          <Share2 className="w-4 h-4" />
-        </Button>
+        <TooltipProvider delayDuration={100}>
+          <div className="flex gap-2">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="secondary" size="icon">
+                  <Settings className="w-4 h-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Settings</p>
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="secondary" size="icon">
+                  <Share2 className="w-4 h-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Share</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+        </TooltipProvider>
       </div>
     </section>
   );
