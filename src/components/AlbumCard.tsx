@@ -1,6 +1,10 @@
  import { cn } from "@/lib/utils";
  import { RatingStars } from "./RatingStars";
  import { Link } from "react-router-dom";
+ import { Star } from "lucide-react";
+ import { Button } from "@/components/ui/button";
+ import { useRatingDialog } from "@/hooks/useRatingDialog";
+ import { mockAlbums } from "@/data/mockData";
  
  interface AlbumCardProps {
    id: string;
@@ -12,6 +16,7 @@
    releaseYear?: number;
    size?: "sm" | "md" | "lg";
    showRating?: boolean;
+   showRateButton?: boolean;
    className?: string;
    style?: React.CSSProperties;
  }
@@ -38,9 +43,21 @@
    releaseYear,
    size = "md",
    showRating = true,
+   showRateButton = true,
    className,
    style,
  }: AlbumCardProps) {
+   const { openRatingDialog } = useRatingDialog();
+ 
+   const handleRateClick = (e: React.MouseEvent) => {
+     e.preventDefault();
+     e.stopPropagation();
+     const album = mockAlbums.find((a) => a.id === id);
+     if (album) {
+       openRatingDialog(album);
+     }
+   };
+ 
    return (
      <Link
        to={`/album/${id}`}
@@ -68,6 +85,18 @@
            </div>
          )}
          <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+         
+         {/* Rate button on hover */}
+         {showRateButton && (
+           <Button
+             size="sm"
+             onClick={handleRateClick}
+             className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 gap-1 bg-primary/90 hover:bg-primary text-primary-foreground backdrop-blur-sm"
+           >
+             <Star className="w-3 h-3" />
+             Rate
+           </Button>
+         )}
        </div>
        
        <div className="flex flex-col gap-0.5">
