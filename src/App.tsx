@@ -3,6 +3,7 @@
  import { TooltipProvider } from "@/components/ui/tooltip";
  import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
  import { BrowserRouter, Routes, Route } from "react-router-dom";
+ import { RatingProvider } from "@/hooks/useRatingDialog";
  import Index from "./pages/Index";
  import Discover from "./pages/Discover";
  import Trending from "./pages/Trending";
@@ -17,20 +18,22 @@
  const App = () => (
    <QueryClientProvider client={queryClient}>
      <TooltipProvider>
-       <Toaster />
-       <Sonner />
        <BrowserRouter>
-         <Routes>
-           <Route path="/" element={<Index />} />
-           <Route path="/discover" element={<Discover />} />
-           <Route path="/trending" element={<Trending />} />
-           <Route path="/friends" element={<Friends />} />
-           <Route path="/profile" element={<Profile />} />
-           <Route path="/album/:id" element={<AlbumDetail />} />
-           <Route path="/user/:id" element={<UserProfile />} />
-           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-           <Route path="*" element={<NotFound />} />
-         </Routes>
+         <RatingProvider>
+           <Toaster />
+           <Sonner />
+           <Routes>
+             <Route path="/" element={<Index />} />
+             <Route path="/discover" element={<Discover />} />
+             <Route path="/trending" element={<Trending />} />
+             <Route path="/friends" element={<Friends />} />
+             <Route path="/profile" element={<Profile />} />
+             <Route path="/album/:id" element={<AlbumDetail />} />
+             <Route path="/user/:id" element={<UserProfile />} />
+             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+             <Route path="*" element={<NotFound />} />
+           </Routes>
+         </RatingProvider>
        </BrowserRouter>
      </TooltipProvider>
    </QueryClientProvider>
