@@ -1,17 +1,18 @@
- import { Toaster } from "@/components/ui/toaster";
- import { Toaster as Sonner } from "@/components/ui/sonner";
- import { TooltipProvider } from "@/components/ui/tooltip";
- import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
- import { BrowserRouter, Routes, Route } from "react-router-dom";
- import { RatingProvider } from "@/hooks/useRatingDialog";
- import Index from "./pages/Index";
- import Discover from "./pages/Discover";
- import Trending from "./pages/Trending";
- import Friends from "./pages/Friends";
- import Profile from "./pages/Profile";
- import AlbumDetail from "./pages/AlbumDetail";
- import UserProfile from "./pages/UserProfile";
- import NotFound from "./pages/NotFound";
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { RatingProvider } from "@/hooks/useRatingDialog";
+import YourPage from "./pages/YourPage";
+import Feed from "./pages/Feed";
+import Discover from "./pages/Discover";
+import Trending from "./pages/Trending";
+import Friends from "./pages/Friends";
+import Profile from "./pages/Profile";
+import AlbumDetail from "./pages/AlbumDetail";
+import UserProfile from "./pages/UserProfile";
+import NotFound from "./pages/NotFound";
  
  const queryClient = new QueryClient();
  
@@ -22,9 +23,10 @@
          <RatingProvider>
            <Toaster />
            <Sonner />
-           <Routes>
-             <Route path="/" element={<Index />} />
-             <Route path="/discover" element={<Discover />} />
+            <Routes>
+              <Route path="/" element={<YourPage />} />
+              <Route path="/feed" element={<Feed />} />
+              <Route path="/discover" element={<Discover />} />
              <Route path="/trending" element={<Trending />} />
              <Route path="/friends" element={<Friends />} />
              <Route path="/profile" element={<Profile />} />
