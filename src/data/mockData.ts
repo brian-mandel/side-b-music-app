@@ -1,0 +1,199 @@
+ // Mock data for Resonance app
+ 
+ export interface User {
+   id: string;
+   name: string;
+   username: string;
+   avatar?: string;
+   bio?: string;
+   followers: number;
+   following: number;
+   ratingsCount: number;
+ }
+ 
+ export interface Album {
+   id: string;
+   title: string;
+   artist: string;
+   coverUrl: string;
+   releaseYear: number;
+   genre: string[];
+   averageRating: number;
+   ratingsCount: number;
+ }
+ 
+ export interface Rating {
+   id: string;
+   userId: string;
+   albumId: string;
+   rating: number;
+   comment: string;
+   likes: number;
+   replies: number;
+   createdAt: string;
+ }
+ 
+ export const mockUsers: User[] = [
+   {
+     id: "1",
+     name: "Alex Rivera",
+     username: "alexr",
+     avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop",
+     bio: "Music enthusiast. Jazz & electronic lover.",
+     followers: 1240,
+     following: 89,
+     ratingsCount: 342,
+   },
+   {
+     id: "2",
+     name: "Maya Chen",
+     username: "mayac",
+     avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop",
+     bio: "Indie rock is life. Also into ambient and shoegaze.",
+     followers: 892,
+     following: 156,
+     ratingsCount: 567,
+   },
+   {
+     id: "3",
+     name: "Jordan Blake",
+     username: "jblake",
+     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop",
+     bio: "Hip-hop head. Always hunting for new beats.",
+     followers: 2100,
+     following: 234,
+     ratingsCount: 890,
+   },
+ ];
+ 
+ export const mockAlbums: Album[] = [
+   {
+     id: "1",
+     title: "In Rainbows",
+     artist: "Radiohead",
+     coverUrl: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=400&h=400&fit=crop",
+     releaseYear: 2007,
+     genre: ["Alternative Rock", "Art Rock"],
+     averageRating: 4.7,
+     ratingsCount: 12453,
+   },
+   {
+     id: "2",
+     title: "Blonde",
+     artist: "Frank Ocean",
+     coverUrl: "https://images.unsplash.com/photo-1598387993441-a364f854c3e1?w=400&h=400&fit=crop",
+     releaseYear: 2016,
+     genre: ["R&B", "Art Pop"],
+     averageRating: 4.8,
+     ratingsCount: 18902,
+   },
+   {
+     id: "3",
+     title: "To Pimp a Butterfly",
+     artist: "Kendrick Lamar",
+     coverUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop",
+     releaseYear: 2015,
+     genre: ["Hip-Hop", "Jazz Rap"],
+     averageRating: 4.9,
+     ratingsCount: 21340,
+   },
+   {
+     id: "4",
+     title: "Currents",
+     artist: "Tame Impala",
+     coverUrl: "https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=400&h=400&fit=crop",
+     releaseYear: 2015,
+     genre: ["Psychedelic Pop", "Synth-pop"],
+     averageRating: 4.5,
+     ratingsCount: 15678,
+   },
+   {
+     id: "5",
+     title: "good kid, m.A.A.d city",
+     artist: "Kendrick Lamar",
+     coverUrl: "https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400&h=400&fit=crop",
+     releaseYear: 2012,
+     genre: ["Hip-Hop", "West Coast"],
+     averageRating: 4.8,
+     ratingsCount: 19234,
+   },
+   {
+     id: "6",
+     title: "The Dark Side of the Moon",
+     artist: "Pink Floyd",
+     coverUrl: "https://images.unsplash.com/photo-1534841090574-cba2d662b62e?w=400&h=400&fit=crop",
+     releaseYear: 1973,
+     genre: ["Progressive Rock", "Psychedelic"],
+     averageRating: 4.9,
+     ratingsCount: 34567,
+   },
+ ];
+ 
+ export const mockRatings: Rating[] = [
+   {
+     id: "1",
+     userId: "2",
+     albumId: "1",
+     rating: 5,
+     comment: "Absolutely transcendent. Every track flows into the next with such grace. This album changed how I think about music.",
+     likes: 234,
+     replies: 45,
+     createdAt: "2 hours ago",
+   },
+   {
+     id: "2",
+     userId: "3",
+     albumId: "3",
+     rating: 5,
+     comment: "A masterpiece of modern hip-hop. The jazz influences are incredible and Kendrick's storytelling is unmatched.",
+     likes: 567,
+     replies: 89,
+     createdAt: "4 hours ago",
+   },
+   {
+     id: "3",
+     userId: "1",
+     albumId: "2",
+     rating: 4.5,
+     comment: "Frank Ocean at his most vulnerable. The production is minimal but every sound feels intentional. 'Self Control' hits different every time.",
+     likes: 189,
+     replies: 23,
+     createdAt: "6 hours ago",
+   },
+   {
+     id: "4",
+     userId: "2",
+     albumId: "4",
+     rating: 4,
+     comment: "Kevin Parker is a genius. The shift from psychedelic rock to synth-pop works surprisingly well. 'Let It Happen' is an instant classic.",
+     likes: 145,
+     replies: 18,
+     createdAt: "1 day ago",
+   },
+   {
+     id: "5",
+     userId: "1",
+     albumId: "6",
+     rating: 5,
+     comment: "There's a reason this album is considered one of the greatest of all time. The production was so ahead of its time.",
+     likes: 890,
+     replies: 156,
+     createdAt: "2 days ago",
+   },
+ ];
+ 
+ // Helper function to get user by id
+ export const getUserById = (id: string): User | undefined =>
+   mockUsers.find((u) => u.id === id);
+ 
+ // Helper function to get album by id
+ export const getAlbumById = (id: string): Album | undefined =>
+   mockAlbums.find((a) => a.id === id);
+ 
+ // Get ratings with user and album data
+ export const getEnrichedRatings = () =>
+   mockRatings.map((rating) => ({
+     ...rating,
+     user: getUserById(rating.userId)!,
+     album: getAlbumById(rating.albumId)!,
+   }));
