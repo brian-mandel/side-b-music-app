@@ -1,18 +1,22 @@
 import { useState } from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
-import { Search, Star, Pencil, X } from "lucide-react";
+import { Search, Star, Pencil, X, Settings, Share2, Disc3, MessageCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { mockAlbums, mockRatings, Album, getUserById } from "@/data/mockData";
+import { mockAlbums, mockRatings, mockUsers, Album } from "@/data/mockData";
 import { RatingStars } from "@/components/RatingStars";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { UserAvatar } from "@/components/UserAvatar";
 
 const MAX_COMMENT_LENGTH = 500;
 
-// Get current user's ratings (user id "1" is Alex Rivera, the logged-in user)
+// Get current user (user id "1" is Alex Rivera, the logged-in user)
+const currentUser = mockUsers[0];
+
+// Get current user's ratings
 const getCurrentUserRatings = () => {
   return mockRatings
     .filter((r) => r.userId === "1")
@@ -99,14 +103,51 @@ export default function YourPage() {
   return (
     <AppLayout>
       <div className="max-w-4xl mx-auto pb-20 lg:pb-0">
-        {/* Header */}
+        {/* Profile Header */}
         <section className="mb-8">
-          <h1 className="text-3xl lg:text-4xl font-display font-bold mb-2">
-            Your <span className="text-gradient">Page</span>
-          </h1>
-          <p className="text-muted-foreground">
-            Rate albums and manage your music journey.
-          </p>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-6">
+            <UserAvatar name={currentUser.name} image={currentUser.avatar} size="lg" />
+
+            <div className="flex-1">
+              <h1 className="text-2xl lg:text-3xl font-display font-bold">
+                {currentUser.name}
+              </h1>
+              <p className="text-muted-foreground mb-2">@{currentUser.username}</p>
+              <p className="text-sm text-foreground/80">{currentUser.bio}</p>
+            </div>
+
+            <div className="flex gap-2">
+              <Button variant="secondary" size="icon">
+                <Share2 className="w-4 h-4" />
+              </Button>
+              <Button variant="secondary" size="icon">
+                <Settings className="w-4 h-4" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-4">
+            <div className="p-4 rounded-xl bg-card border border-border text-center">
+              <Disc3 className="w-5 h-5 mx-auto mb-1 text-primary" />
+              <div className="text-xl font-bold">{userRatings.length}</div>
+              <div className="text-xs text-muted-foreground">Albums Rated</div>
+            </div>
+            <div className="p-4 rounded-xl bg-card border border-border text-center">
+              <Star className="w-5 h-5 mx-auto mb-1 text-star-filled" />
+              <div className="text-xl font-bold">
+                {userRatings.length > 0
+                  ? (userRatings.reduce((sum, r) => sum + r.rating, 0) / userRatings.length).toFixed(1)
+                  : "—"}
+              </div>
+              <div className="text-xs text-muted-foreground">Avg Rating</div>
+            </div>
+            <div className="p-4 rounded-xl bg-card border border-border text-center">
+              <MessageCircle className="w-5 h-5 mx-auto mb-1 text-accent" />
+              <div className="text-xl font-bold">{currentUser.followers.toLocaleString()}</div>
+              <div className="text-xs text-muted-foreground">Followers</div>
+            </div>
+          </div>
         </section>
 
         {/* Prominent Album Search & Rating Section */}

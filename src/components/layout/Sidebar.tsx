@@ -1,14 +1,12 @@
-import { Home, Search, User, Disc3, Users, TrendingUp, LayoutDashboard } from "lucide-react";
+import { Home, Search, Disc3, Users, User } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { icon: LayoutDashboard, label: "Your Page", href: "/" },
+  { icon: User, label: "You", href: "/" },
   { icon: Home, label: "Feed", href: "/feed" },
-  { icon: Search, label: "Discover", href: "/discover" },
-  { icon: TrendingUp, label: "Trending", href: "/trending" },
+  { icon: Search, label: "Explore", href: "/explore" },
   { icon: Users, label: "Friends", href: "/friends" },
-  { icon: User, label: "Profile", href: "/profile" },
 ];
  
  export function Sidebar() {
