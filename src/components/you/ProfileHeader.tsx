@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { UserAvatar } from "@/components/UserAvatar";
 import { User } from "@/data/mockData";
+import { useNavigate } from "react-router-dom";
+import { ShareProfileDialog } from "@/components/ShareProfileDialog";
 
 interface ProfileHeaderProps {
   user: User;
@@ -19,6 +21,8 @@ interface ProfileHeaderProps {
 export function ProfileHeader({ user, onBioUpdate }: ProfileHeaderProps) {
   const [isEditingBio, setIsEditingBio] = useState(false);
   const [bioValue, setBioValue] = useState(user.bio || "");
+  const [shareOpen, setShareOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleSaveBio = () => {
     onBioUpdate?.(bioValue);
@@ -84,7 +88,7 @@ export function ProfileHeader({ user, onBioUpdate }: ProfileHeaderProps) {
           <div className="flex gap-2">
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button variant="secondary" size="icon">
+                <Button variant="secondary" size="icon" onClick={() => navigate("/settings")}>
                   <Settings className="w-4 h-4" />
                 </Button>
               </TooltipTrigger>
@@ -94,7 +98,7 @@ export function ProfileHeader({ user, onBioUpdate }: ProfileHeaderProps) {
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button variant="secondary" size="icon">
+                <Button variant="secondary" size="icon" onClick={() => setShareOpen(true)}>
                   <Share2 className="w-4 h-4" />
                 </Button>
               </TooltipTrigger>
@@ -105,6 +109,12 @@ export function ProfileHeader({ user, onBioUpdate }: ProfileHeaderProps) {
           </div>
         </TooltipProvider>
       </div>
+
+      <ShareProfileDialog
+        username={user.username}
+        open={shareOpen}
+        onOpenChange={setShareOpen}
+      />
     </section>
   );
 }

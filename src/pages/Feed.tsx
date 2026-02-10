@@ -39,29 +39,38 @@ const Index = () => {
     <AppLayout>
       <div className="max-w-6xl mx-auto pb-20 lg:pb-0">
         {/* Welcome */}
-        <section className="mb-8">
-          <div className="flex items-center justify-between mb-2">
-            <h1 className="text-3xl lg:text-4xl font-display font-bold">
-              Welcome back, <span className="text-gradient">Alex</span>
-            </h1>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setSearchOpen(!searchOpen)}
-              className="shrink-0"
-            >
-              {searchOpen ? <X className="w-5 h-5" /> : <Search className="w-5 h-5" />}
-            </Button>
-          </div>
-          <p className="text-muted-foreground">
-            See what people are saying about albums and join the conversation.
-          </p>
-          {searchOpen && (
-            <div className="mt-4 animate-fade-in">
-              <SearchBar placeholder="Search albums, artists, users..." />
+        {searchOpen ? (
+          /* Explore overlay */
+          <section className="mb-8 animate-fade-in">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-2xl font-display font-bold">Explore</h2>
+              <Button variant="ghost" size="icon" onClick={() => setSearchOpen(false)}>
+                <X className="w-5 h-5" />
+              </Button>
             </div>
-          )}
-        </section>
+            <SearchBar placeholder="Explore albums, artists, and people" />
+          </section>
+        ) : (
+          <section className="mb-8">
+            <div className="flex items-center justify-between mb-2">
+              <h1 className="text-3xl lg:text-4xl font-display font-bold">
+                Welcome back, <span className="text-gradient">Alex</span>
+              </h1>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setSearchOpen(true)}
+                className="shrink-0"
+              >
+                <Search className="w-5 h-5" />
+              </Button>
+            </div>
+            <p className="text-muted-foreground">
+              See what people are saying about albums and join the conversation.
+            </p>
+          </section>
+        )}
+
 
         {/* Albums */}
         <section className="mb-10">

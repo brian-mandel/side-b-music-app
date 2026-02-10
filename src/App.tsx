@@ -7,6 +7,7 @@ import { RatingProvider } from "@/hooks/useRatingDialog";
 import YourPage from "./pages/YourPage";
 import Feed from "./pages/Feed";
 import Friends from "./pages/Friends";
+import Settings from "./pages/Settings";
 import AlbumDetail from "./pages/AlbumDetail";
 import UserProfile from "./pages/UserProfile";
 import NotFound from "./pages/NotFound";
@@ -25,6 +26,7 @@ const App = () => (
             <Route path="/home" element={<Feed />} />
             <Route path="/feed" element={<Feed />} />
             <Route path="/friends" element={<Friends />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="/album/:id" element={<AlbumDetail />} />
             <Route path="/user/:id" element={<UserProfile />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
