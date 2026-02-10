@@ -10,7 +10,8 @@ import { Button } from "@/components/ui/button";
 import { useTakes } from "@/hooks/useTakes";
 
 const newReleases = mockAlbums.filter((a) => a.isNewRelease);
-const trendingAlbums = mockAlbums.filter((a) => !a.isNewRelease).slice(0, 5);
+const trendingIds = ["11", "12", "13", "14"];
+const trendingAlbums = mockAlbums.filter((a) => trendingIds.includes(a.id));
 
 const Index = () => {
   const { allTakes } = useTakes();
