@@ -1,5 +1,4 @@
-import { Bell, Settings, LogOut } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Settings, LogOut } from "lucide-react";
 import { UserAvatar } from "@/components/UserAvatar";
 import { mockUsers } from "@/data/mockData";
 import {
@@ -10,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useNavigate } from "react-router-dom";
+import { NotificationsPopover } from "@/components/NotificationsPopover";
 
 export function Header() {
   const currentUser = mockUsers[0];
@@ -19,10 +19,7 @@ export function Header() {
     <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="flex items-center justify-end h-16 px-4 lg:px-8">
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" className="relative">
-            <Bell className="w-5 h-5" />
-            <span className="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full" />
-          </Button>
+          <NotificationsPopover />
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
