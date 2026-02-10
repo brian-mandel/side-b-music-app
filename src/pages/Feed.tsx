@@ -3,16 +3,17 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { CommentCard } from "@/components/CommentCard";
 import { AlbumCard } from "@/components/AlbumCard";
 import { SearchBar } from "@/components/SearchBar";
-import { mockAlbums, getEnrichedRatings } from "@/data/mockData";
+import { mockAlbums, getUserById } from "@/data/mockData";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTakes } from "@/hooks/useTakes";
 
 const newReleases = mockAlbums.filter((a) => a.isNewRelease);
 const trendingAlbums = mockAlbums.filter((a) => !a.isNewRelease).slice(0, 5);
 
 const Index = () => {
-  const enrichedRatings = getEnrichedRatings();
+  const { allTakes } = useTakes();
   const [albumsMode, setAlbumsMode] = useState("new");
   const [takesMode, setTakesMode] = useState("friends");
   const [searchOpen, setSearchOpen] = useState(false);
@@ -22,17 +23,16 @@ const Index = () => {
   const displayedTakes = (() => {
     switch (takesMode) {
       case "hot":
-        return [...enrichedRatings].sort((a, b) => {
+        return [...allTakes].sort((a, b) => {
           const aDeviation = Math.abs(a.rating - a.album.averageRating);
           const bDeviation = Math.abs(b.rating - b.album.averageRating);
           return bDeviation + b.replies - (aDeviation + a.replies);
         });
       case "top":
-        return [...enrichedRatings].sort((a, b) => b.likes + b.replies - (a.likes + a.replies));
+        return [...allTakes].sort((a, b) => b.likes + b.replies - (a.likes + a.replies));
       case "friends":
       default:
-        // Mock: chronological (already in order)
-        return enrichedRatings;
+        return allTakes;
     }
   })();
   return (
@@ -145,29 +145,32 @@ const Index = () => {
             </ToggleGroup>
           </div>
           <div className="space-y-4">
-            {displayedTakes.map((rating, index) => (
-              <CommentCard
-                key={rating.id}
-                id={rating.id}
-                user={{
-                  id: rating.user.id,
-                  name: rating.user.name,
-                  avatar: rating.user.avatar,
-                }}
-                album={{
-                  id: rating.album.id,
-                  title: rating.album.title,
-                  artist: rating.album.artist,
-                  coverUrl: rating.album.coverUrl,
-                }}
-                rating={rating.rating}
-                comment={rating.comment}
-                likes={rating.likes}
-                replies={rating.replies}
-                createdAt={rating.createdAt}
-                style={{ animationDelay: `${index * 0.1}s` } as React.CSSProperties}
-              />
-            ))}
+            {displayedTakes.map((take, index) => {
+              const user = getUserById(take.userId);
+              return (
+                <CommentCard
+                  key={take.id}
+                  id={take.id}
+                  user={{
+                    id: take.userId,
+                    name: user?.name || "You",
+                    avatar: user?.avatar,
+                  }}
+                  album={{
+                    id: take.album.id,
+                    title: take.album.title,
+                    artist: take.album.artist,
+                    coverUrl: take.album.coverUrl,
+                  }}
+                  rating={take.rating}
+                  comment={take.comment}
+                  likes={take.likes}
+                  replies={take.replies}
+                  createdAt={take.createdAt}
+                  style={{ animationDelay: `${index * 0.1}s` } as React.CSSProperties}
+                />
+              );
+            })}
           </div>
         </section>
       </div>
