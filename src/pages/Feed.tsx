@@ -11,20 +11,26 @@ const trendingAlbums = mockAlbums.filter((a) => !a.isNewRelease).slice(0, 5);
 const Index = () => {
   const enrichedRatings = getEnrichedRatings();
   const [albumsMode, setAlbumsMode] = useState("new");
-  const [takesMode, setTakesMode] = useState("top");
+  const [takesMode, setTakesMode] = useState("friends");
 
   const displayedAlbums = albumsMode === "new" ? newReleases : trendingAlbums;
 
-  // Mock: "Top Takes" by likes, "Hot Takes" by deviation from average
-  const displayedTakes =
-    takesMode === "hot"
-      ? [...enrichedRatings].sort((a, b) => {
+  const displayedTakes = (() => {
+    switch (takesMode) {
+      case "hot":
+        return [...enrichedRatings].sort((a, b) => {
           const aDeviation = Math.abs(a.rating - a.album.averageRating);
           const bDeviation = Math.abs(b.rating - b.album.averageRating);
           return bDeviation + b.replies - (aDeviation + a.replies);
-        })
-      : [...enrichedRatings].sort((a, b) => b.likes + b.replies - (a.likes + a.replies));
-
+        });
+      case "top":
+        return [...enrichedRatings].sort((a, b) => b.likes + b.replies - (a.likes + a.replies));
+      case "friends":
+      default:
+        // Mock: chronological (already in order)
+        return enrichedRatings;
+    }
+  })();
   return (
     <AppLayout>
       <div className="max-w-6xl mx-auto pb-20 lg:pb-0">
@@ -90,6 +96,12 @@ const Index = () => {
               onValueChange={(v) => v && setTakesMode(v)}
               className="border border-border rounded-md p-0.5"
             >
+              <ToggleGroupItem
+                value="friends"
+                className="text-xs px-3 py-1 h-7 data-[state=on]:bg-primary data-[state=on]:text-primary-foreground rounded-sm"
+              >
+                Friends
+              </ToggleGroupItem>
               <ToggleGroupItem
                 value="top"
                 className="text-xs px-3 py-1 h-7 data-[state=on]:bg-primary data-[state=on]:text-primary-foreground rounded-sm"
