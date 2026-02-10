@@ -39,37 +39,37 @@ const Index = () => {
     <AppLayout>
       <div className="max-w-6xl mx-auto pb-20 lg:pb-0">
         {/* Welcome */}
-        {searchOpen ? (
-          /* Explore overlay */
-          <section className="mb-8 animate-fade-in">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-display font-bold">Explore</h2>
-              <Button variant="ghost" size="icon" onClick={() => setSearchOpen(false)}>
-                <X className="w-5 h-5" />
-              </Button>
+        <section className="mb-8">
+          <h1 className="text-3xl lg:text-4xl font-display font-bold mb-2">
+            Welcome back, <span className="text-gradient">Alex</span>
+          </h1>
+          <p className="text-muted-foreground">
+            See what people are saying about albums and join the conversation.
+          </p>
+        </section>
+
+        {/* Explore Search */}
+        <section className="mb-8">
+          {searchOpen ? (
+            <div className="animate-fade-in">
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="text-lg font-display font-semibold">Explore</h2>
+                <Button variant="ghost" size="icon" onClick={() => setSearchOpen(false)}>
+                  <X className="w-4 h-4" />
+                </Button>
+              </div>
+              <SearchBar placeholder="Explore albums, artists, and people" />
             </div>
-            <SearchBar placeholder="Explore albums, artists, and people" />
-          </section>
-        ) : (
-          <section className="mb-8">
-            <div className="flex items-center justify-between mb-2">
-              <h1 className="text-3xl lg:text-4xl font-display font-bold">
-                Welcome back, <span className="text-gradient">Alex</span>
-              </h1>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setSearchOpen(true)}
-                className="shrink-0"
-              >
-                <Search className="w-5 h-5" />
-              </Button>
-            </div>
-            <p className="text-muted-foreground">
-              See what people are saying about albums and join the conversation.
-            </p>
-          </section>
-        )}
+          ) : (
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-secondary border border-border/50 text-muted-foreground hover:border-border transition-colors text-sm"
+            >
+              <Search className="w-4 h-4" />
+              Explore albums, artists, and people
+            </button>
+          )}
+        </section>
 
 
         {/* Albums */}
