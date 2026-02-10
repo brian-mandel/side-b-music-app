@@ -1,11 +1,12 @@
 import { useState, useRef, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { RatingStars } from "./RatingStars";
+import { AlbumCover } from "./AlbumCover";
 import { Link } from "react-router-dom";
 import { Star, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRatingDialog } from "@/hooks/useRatingDialog";
-import { mockAlbums, mockRatings, FALLBACK_COVER } from "@/data/mockData";
+import { mockAlbums, mockRatings } from "@/data/mockData";
 import { ShareAlbumDialog } from "@/components/ShareAlbumDialog";
 
 interface AlbumCardProps {
@@ -128,11 +129,10 @@ export function AlbumCard({
             coverSizeClasses[size]
           )}
         >
-          <img
+          <AlbumCover
             src={coverUrl}
             alt={`${title} by ${artist}`}
-            className="album-cover w-full h-full object-cover"
-            onError={(e) => { e.currentTarget.src = FALLBACK_COVER; }}
+            className="album-cover w-full h-full rounded-none"
           />
           {userRating && (
             <div className="absolute bottom-2 left-2 px-2 py-1 rounded-md bg-background/90 backdrop-blur-sm">

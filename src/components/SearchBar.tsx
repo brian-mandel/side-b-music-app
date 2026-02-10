@@ -1,4 +1,5 @@
- import { Search, Star, X } from "lucide-react";
+import { Search, Star, X } from "lucide-react";
+import { AlbumCover } from "./AlbumCover";
  import { Input } from "@/components/ui/input";
  import { Button } from "@/components/ui/button";
  import { cn } from "@/lib/utils";
@@ -101,11 +102,11 @@
                    }}
                    className="flex items-center gap-3 flex-1 min-w-0"
                  >
-                   <img
-                     src={album.coverUrl}
-                     alt={album.title}
-                     className="w-10 h-10 rounded object-cover"
-                   />
+                    <AlbumCover
+                      src={album.coverUrl}
+                      alt={album.title}
+                      className="w-10 h-10 rounded"
+                    />
                    <div className="flex-1 min-w-0">
                      <p className="font-medium text-sm text-foreground truncate">
                        {album.title}

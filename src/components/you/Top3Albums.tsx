@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Plus, GripVertical, X } from "lucide-react";
 import { Album, mockAlbums } from "@/data/mockData";
+import { AlbumCover } from "@/components/AlbumCover";
 import { cn } from "@/lib/utils";
 import {
   Dialog,
@@ -110,11 +111,11 @@ export function Top3Albums({ albums, onUpdate }: Top3AlbumsProps) {
                 >
                   {album ? (
                     <>
-                      <img
-                        src={album.coverUrl}
-                        alt={album.title}
-                        className="w-full h-full object-cover"
-                      />
+                       <AlbumCover
+                         src={album.coverUrl}
+                         alt={album.title}
+                         className="w-full h-full rounded-none"
+                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                         <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3">
                           <p className="text-white text-xs sm:text-sm font-medium truncate">
@@ -167,11 +168,11 @@ export function Top3Albums({ albums, onUpdate }: Top3AlbumsProps) {
                         onClick={() => handleSelectAlbum(album)}
                         className="w-full flex items-center gap-3 p-2 hover:bg-secondary/50 rounded-lg transition-colors text-left"
                       >
-                        <img
-                          src={album.coverUrl}
-                          alt={album.title}
-                          className="w-10 h-10 rounded object-cover"
-                        />
+                         <AlbumCover
+                           src={album.coverUrl}
+                           alt={album.title}
+                           className="w-10 h-10 rounded"
+                         />
                         <div className="flex-1 min-w-0">
                           <p className="font-medium text-sm truncate">{album.title}</p>
                           <p className="text-xs text-muted-foreground truncate">{album.artist}</p>

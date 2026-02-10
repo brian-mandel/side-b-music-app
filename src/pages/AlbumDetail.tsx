@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft, Share2, Bookmark, Play } from "lucide-react";
-import { getAlbumById, getUserById, FALLBACK_COVER } from "@/data/mockData";
+import { getAlbumById, getUserById } from "@/data/mockData";
+import { AlbumCover } from "@/components/AlbumCover";
 import { useState } from "react";
 import { useTakes } from "@/hooks/useTakes";
 import { ShareAlbumDialog } from "@/components/ShareAlbumDialog";
@@ -56,11 +57,10 @@ const AlbumDetail = () => {
         {/* Album Header */}
         <div className="flex flex-col md:flex-row gap-6 mb-8">
           <div className="shrink-0">
-            <img
+            <AlbumCover
               src={album.coverUrl}
               alt={album.title}
-              className="w-full md:w-64 h-auto md:h-64 rounded-xl object-cover shadow-lg"
-              onError={(e) => { e.currentTarget.src = FALLBACK_COVER; }}
+              className="w-full md:w-64 h-auto md:h-64 rounded-xl shadow-lg"
             />
           </div>
 
