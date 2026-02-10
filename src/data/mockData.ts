@@ -11,16 +11,17 @@
    ratingsCount: number;
  }
  
- export interface Album {
-   id: string;
-   title: string;
-   artist: string;
-   coverUrl: string;
-   releaseYear: number;
-   genre: string[];
-   averageRating: number;
-   ratingsCount: number;
- }
+export interface Album {
+  id: string;
+  title: string;
+  artist: string;
+  coverUrl: string;
+  releaseYear: number;
+  genre: string[];
+  averageRating: number;
+  ratingsCount: number;
+  isNewRelease?: boolean;
+}
  
  export interface Rating {
    id: string;
@@ -66,68 +67,112 @@
    },
  ];
  
- export const mockAlbums: Album[] = [
-   {
-     id: "1",
-     title: "In Rainbows",
-     artist: "Radiohead",
-     coverUrl: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=400&h=400&fit=crop",
-     releaseYear: 2007,
-     genre: ["Alternative Rock", "Art Rock"],
-     averageRating: 4.7,
-     ratingsCount: 12453,
-   },
-   {
-     id: "2",
-     title: "Blonde",
-     artist: "Frank Ocean",
-     coverUrl: "https://images.unsplash.com/photo-1598387993441-a364f854c3e1?w=400&h=400&fit=crop",
-     releaseYear: 2016,
-     genre: ["R&B", "Art Pop"],
-     averageRating: 4.8,
-     ratingsCount: 18902,
-   },
-   {
-     id: "3",
-     title: "To Pimp a Butterfly",
-     artist: "Kendrick Lamar",
-     coverUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop",
-     releaseYear: 2015,
-     genre: ["Hip-Hop", "Jazz Rap"],
-     averageRating: 4.9,
-     ratingsCount: 21340,
-   },
-   {
-     id: "4",
-     title: "Currents",
-     artist: "Tame Impala",
-     coverUrl: "https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=400&h=400&fit=crop",
-     releaseYear: 2015,
-     genre: ["Psychedelic Pop", "Synth-pop"],
-     averageRating: 4.5,
-     ratingsCount: 15678,
-   },
-   {
-     id: "5",
-     title: "good kid, m.A.A.d city",
-     artist: "Kendrick Lamar",
-     coverUrl: "https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400&h=400&fit=crop",
-     releaseYear: 2012,
-     genre: ["Hip-Hop", "West Coast"],
-     averageRating: 4.8,
-     ratingsCount: 19234,
-   },
-   {
-     id: "6",
-     title: "The Dark Side of the Moon",
-     artist: "Pink Floyd",
-     coverUrl: "https://images.unsplash.com/photo-1534841090574-cba2d662b62e?w=400&h=400&fit=crop",
-     releaseYear: 1973,
-     genre: ["Progressive Rock", "Psychedelic"],
-     averageRating: 4.9,
-     ratingsCount: 34567,
-   },
- ];
+export const mockAlbums: Album[] = [
+  {
+    id: "1",
+    title: "In Rainbows",
+    artist: "Radiohead",
+    coverUrl: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=400&h=400&fit=crop",
+    releaseYear: 2007,
+    genre: ["Alternative Rock", "Art Rock"],
+    averageRating: 4.7,
+    ratingsCount: 12453,
+  },
+  {
+    id: "2",
+    title: "Blonde",
+    artist: "Frank Ocean",
+    coverUrl: "https://images.unsplash.com/photo-1598387993441-a364f854c3e1?w=400&h=400&fit=crop",
+    releaseYear: 2016,
+    genre: ["R&B", "Art Pop"],
+    averageRating: 4.8,
+    ratingsCount: 18902,
+  },
+  {
+    id: "3",
+    title: "To Pimp a Butterfly",
+    artist: "Kendrick Lamar",
+    coverUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop",
+    releaseYear: 2015,
+    genre: ["Hip-Hop", "Jazz Rap"],
+    averageRating: 4.9,
+    ratingsCount: 21340,
+  },
+  {
+    id: "4",
+    title: "Currents",
+    artist: "Tame Impala",
+    coverUrl: "https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=400&h=400&fit=crop",
+    releaseYear: 2015,
+    genre: ["Psychedelic Pop", "Synth-pop"],
+    averageRating: 4.5,
+    ratingsCount: 15678,
+  },
+  {
+    id: "5",
+    title: "good kid, m.A.A.d city",
+    artist: "Kendrick Lamar",
+    coverUrl: "https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400&h=400&fit=crop",
+    releaseYear: 2012,
+    genre: ["Hip-Hop", "West Coast"],
+    averageRating: 4.8,
+    ratingsCount: 19234,
+  },
+  {
+    id: "6",
+    title: "The Dark Side of the Moon",
+    artist: "Pink Floyd",
+    coverUrl: "https://images.unsplash.com/photo-1534841090574-cba2d662b62e?w=400&h=400&fit=crop",
+    releaseYear: 1973,
+    genre: ["Progressive Rock", "Psychedelic"],
+    averageRating: 4.9,
+    ratingsCount: 34567,
+  },
+  {
+    id: "7",
+    title: "Chromatic Drift",
+    artist: "Naia Vox",
+    coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop",
+    releaseYear: 2026,
+    genre: ["Electronic", "Ambient"],
+    averageRating: 4.2,
+    ratingsCount: 87,
+    isNewRelease: true,
+  },
+  {
+    id: "8",
+    title: "Late Bloom",
+    artist: "Sable Park",
+    coverUrl: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop",
+    releaseYear: 2026,
+    genre: ["Indie Folk", "Singer-Songwriter"],
+    averageRating: 4.0,
+    ratingsCount: 42,
+    isNewRelease: true,
+  },
+  {
+    id: "9",
+    title: "Concrete Glow",
+    artist: "DVRK MATTR",
+    coverUrl: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop",
+    releaseYear: 2026,
+    genre: ["Hip-Hop", "Experimental"],
+    averageRating: 3.8,
+    ratingsCount: 128,
+    isNewRelease: true,
+  },
+  {
+    id: "10",
+    title: "Glass Hours",
+    artist: "Elara Moon",
+    coverUrl: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=400&fit=crop",
+    releaseYear: 2026,
+    genre: ["Dream Pop", "Shoegaze"],
+    averageRating: 4.5,
+    ratingsCount: 63,
+    isNewRelease: true,
+  },
+];
  
  export const mockRatings: Rating[] = [
    {
