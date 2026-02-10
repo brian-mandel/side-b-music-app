@@ -2,7 +2,7 @@ import { useState, useRef, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { RatingStars } from "./RatingStars";
 import { Link } from "react-router-dom";
-import { Star } from "lucide-react";
+import { Star, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRatingDialog } from "@/hooks/useRatingDialog";
 import { mockAlbums, mockRatings } from "@/data/mockData";
@@ -63,6 +63,13 @@ export function AlbumCard({
   const didLongPress = useRef(false);
 
   const sharedFriendsCount = getSharedFriendsCount(id);
+  const hasSharedTakes = sharedFriendsCount > 0;
+
+  const handleShareClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShareOpen(true);
+  };
 
   const handleRateClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -132,6 +139,16 @@ export function AlbumCard({
             </div>
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+          {/* Share button for shared albums */}
+          {hasSharedTakes && (
+            <button
+              onClick={handleShareClick}
+              className="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-background/80 backdrop-blur-sm text-foreground opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 hover:bg-background"
+            >
+              <MoreHorizontal className="w-4 h-4" />
+            </button>
+          )}
           
           {showRateButton && (
             <Button
