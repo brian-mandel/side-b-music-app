@@ -2,8 +2,11 @@ import { useState } from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { CommentCard } from "@/components/CommentCard";
 import { AlbumCard } from "@/components/AlbumCard";
+import { SearchBar } from "@/components/SearchBar";
 import { mockAlbums, getEnrichedRatings } from "@/data/mockData";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Search, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const newReleases = mockAlbums.filter((a) => a.isNewRelease);
 const trendingAlbums = mockAlbums.filter((a) => !a.isNewRelease).slice(0, 5);
@@ -12,6 +15,7 @@ const Index = () => {
   const enrichedRatings = getEnrichedRatings();
   const [albumsMode, setAlbumsMode] = useState("new");
   const [takesMode, setTakesMode] = useState("friends");
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const displayedAlbums = albumsMode === "new" ? newReleases : trendingAlbums;
 
@@ -36,12 +40,27 @@ const Index = () => {
       <div className="max-w-6xl mx-auto pb-20 lg:pb-0">
         {/* Welcome */}
         <section className="mb-8">
-          <h1 className="text-3xl lg:text-4xl font-display font-bold mb-2">
-            Welcome back, <span className="text-gradient">Alex</span>
-          </h1>
+          <div className="flex items-center justify-between mb-2">
+            <h1 className="text-3xl lg:text-4xl font-display font-bold">
+              Welcome back, <span className="text-gradient">Alex</span>
+            </h1>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setSearchOpen(!searchOpen)}
+              className="shrink-0"
+            >
+              {searchOpen ? <X className="w-5 h-5" /> : <Search className="w-5 h-5" />}
+            </Button>
+          </div>
           <p className="text-muted-foreground">
             See what people are saying about albums and join the conversation.
           </p>
+          {searchOpen && (
+            <div className="mt-4 animate-fade-in">
+              <SearchBar placeholder="Search albums, artists, users..." />
+            </div>
+          )}
         </section>
 
         {/* Albums */}
