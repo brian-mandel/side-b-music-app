@@ -70,7 +70,7 @@
                      </Link>
                      <p className="text-sm text-muted-foreground">@{user.username}</p>
                      <p className="text-xs text-muted-foreground mt-1">
-                       {user.ratingsCount} ratings · {user.followers.toLocaleString()} followers
+                       {user.ratingsCount} takes · {user.followers.toLocaleString()} followers
                      </p>
                    </div>
                    <Button variant="secondary" size="sm" className="gap-1">

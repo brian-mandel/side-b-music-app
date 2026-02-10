@@ -51,7 +51,7 @@
              <div className="flex items-center gap-6 text-sm">
                <div>
                  <span className="font-bold text-foreground">{user.ratingsCount}</span>
-                 <span className="text-muted-foreground ml-1">Ratings</span>
+                 <span className="text-muted-foreground ml-1">Takes</span>
                </div>
                <div>
                  <span className="font-bold text-foreground">{user.followers.toLocaleString()}</span>
@@ -86,11 +86,11 @@
            </Button>
          </div>
  
-         {/* User's Ratings */}
-         <section>
-           <h2 className="text-xl font-display font-semibold mb-4">
-             Recent Ratings
-           </h2>
+          {/* User's Takes */}
+          <section>
+            <h2 className="text-xl font-display font-semibold mb-4">
+              Recent Takes
+            </h2>
            <div className="space-y-4">
              {userRatings.length > 0 ? (
                userRatings.map((rating) => (
@@ -117,7 +117,7 @@
                ))
              ) : (
                <p className="text-center text-muted-foreground py-8">
-                 No ratings yet.
+                 No takes yet.
                </p>
              )}
            </div>
