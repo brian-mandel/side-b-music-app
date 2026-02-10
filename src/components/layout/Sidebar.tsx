@@ -1,11 +1,10 @@
-import { Home, Search, Disc3, Users, User } from "lucide-react";
+import { Home, Disc3, Users, User } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { icon: User, label: "You", href: "/" },
-  { icon: Home, label: "Feed", href: "/feed" },
-  { icon: Search, label: "Explore", href: "/explore" },
+  { icon: Home, label: "Home", href: "/home" },
   { icon: Users, label: "Friends", href: "/friends" },
 ];
  
@@ -53,9 +52,9 @@ const navItems = [
  
          <div className="p-4 border-t border-sidebar-border">
            <div className="px-4 py-3 rounded-lg bg-sidebar-accent/30">
-             <p className="text-xs text-muted-foreground">
-               Rate albums, join the conversation
-             </p>
+            <p className="text-xs text-muted-foreground">
+              Share your takes, join the conversation
+            </p>
            </div>
          </div>
        </aside>

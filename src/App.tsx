@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RatingProvider } from "@/hooks/useRatingDialog";
 import YourPage from "./pages/YourPage";
 import Feed from "./pages/Feed";
-import Explore from "./pages/Explore";
 import Friends from "./pages/Friends";
 import AlbumDetail from "./pages/AlbumDetail";
 import UserProfile from "./pages/UserProfile";
@@ -23,8 +22,8 @@ const App = () => (
           <Sonner />
           <Routes>
             <Route path="/" element={<YourPage />} />
+            <Route path="/home" element={<Feed />} />
             <Route path="/feed" element={<Feed />} />
-            <Route path="/explore" element={<Explore />} />
             <Route path="/friends" element={<Friends />} />
             <Route path="/album/:id" element={<AlbumDetail />} />
             <Route path="/user/:id" element={<UserProfile />} />
