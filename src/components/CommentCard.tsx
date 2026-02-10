@@ -1,5 +1,5 @@
 import { UserAvatar } from "./UserAvatar";
-import { FALLBACK_COVER } from "@/data/mockData";
+import { AlbumCover } from "./AlbumCover";
  import { RatingStars } from "./RatingStars";
  import { MessageCircle, Heart } from "lucide-react";
  import { Button } from "@/components/ui/button";
@@ -53,11 +53,10 @@ import { FALLBACK_COVER } from "@/data/mockData";
        <div className="flex gap-3">
          {showAlbum && album && (
            <Link to={`/album/${album.id}`} className="shrink-0">
-              <img
+              <AlbumCover
                 src={album.coverUrl}
                 alt={album.title}
-                className="w-16 h-16 rounded-lg object-cover album-cover"
-                onError={(e) => { e.currentTarget.src = FALLBACK_COVER; }}
+                className="w-16 h-16 rounded-lg"
               />
            </Link>
          )}

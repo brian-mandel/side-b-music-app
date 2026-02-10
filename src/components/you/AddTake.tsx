@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { RatingStars } from "@/components/RatingStars";
 import { Album, mockAlbums } from "@/data/mockData";
+import { AlbumCover } from "@/components/AlbumCover";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
@@ -91,10 +92,10 @@ export function AddTake({ onTakeSubmitted }: AddTakeProps) {
                     onClick={() => handleSelectAlbum(album)}
                     className="w-full flex items-center gap-3 p-3 hover:bg-secondary/50 transition-colors text-left"
                   >
-                    <img
+                    <AlbumCover
                       src={album.coverUrl}
                       alt={album.title}
-                      className="w-12 h-12 rounded object-cover"
+                      className="w-12 h-12 rounded"
                     />
                     <div className="flex-1 min-w-0">
                       <p className="font-medium text-foreground truncate">
@@ -122,10 +123,10 @@ export function AddTake({ onTakeSubmitted }: AddTakeProps) {
         <div className="space-y-4">
           {/* Selected Album */}
           <div className="flex items-start gap-4 p-4 rounded-xl bg-background border border-border">
-            <img
+            <AlbumCover
               src={selectedAlbum.coverUrl}
               alt={selectedAlbum.title}
-              className="w-20 h-20 rounded-lg object-cover shadow-md"
+              className="w-20 h-20 rounded-lg shadow-md"
             />
             <div className="flex-1 min-w-0">
               <div className="flex items-start justify-between gap-2">

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Copy, Check, Share2, MessageSquare } from "lucide-react";
+import { AlbumCover } from "./AlbumCover";
 import {
   Dialog,
   DialogContent,
@@ -57,10 +58,10 @@ export function ShareAlbumDialog({ album, sharedFriendsCount, open, onOpenChange
         </DialogHeader>
 
         <div className="flex items-center gap-4 mb-4">
-          <img
+          <AlbumCover
             src={album.coverUrl}
             alt={album.title}
-            className="w-16 h-16 rounded-lg object-cover"
+            className="w-16 h-16 rounded-lg"
           />
           <div className="min-w-0">
             <p className="font-medium text-foreground truncate">{album.title}</p>

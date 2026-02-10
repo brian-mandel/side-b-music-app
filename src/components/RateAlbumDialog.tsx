@@ -7,7 +7,8 @@
  } from "@/components/ui/dialog";
  import { Button } from "@/components/ui/button";
  import { Textarea } from "@/components/ui/textarea";
- import { RatingStars } from "./RatingStars";
+import { RatingStars } from "./RatingStars";
+import { AlbumCover } from "./AlbumCover";
  import { Album } from "@/data/mockData";
  import { toast } from "sonner";
  
@@ -59,11 +60,11 @@
          </DialogHeader>
  
          <div className="flex gap-4 mt-2">
-           <img
-             src={album.coverUrl}
-             alt={album.title}
-             className="w-20 h-20 rounded-lg object-cover shadow-md"
-           />
+            <AlbumCover
+              src={album.coverUrl}
+              alt={album.title}
+              className="w-20 h-20 rounded-lg shadow-md"
+            />
            <div className="flex-1 min-w-0">
              <h3 className="font-semibold text-foreground truncate">
                {album.title}

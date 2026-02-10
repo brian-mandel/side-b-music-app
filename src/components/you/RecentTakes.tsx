@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { RatingStars } from "@/components/RatingStars";
 import { Link } from "react-router-dom";
 import { Album, Rating } from "@/data/mockData";
+import { AlbumCover } from "@/components/AlbumCover";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
@@ -71,10 +72,10 @@ export function RecentTakes({ takes, maxItems = 5, onTakeUpdate }: RecentTakesPr
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
                   <Link to={`/album/${take.album.id}`}>
-                    <img
+                    <AlbumCover
                       src={take.album.coverUrl}
                       alt={take.album.title}
-                      className="w-14 h-14 rounded-lg object-cover shadow-md"
+                      className="w-14 h-14 rounded-lg shadow-md"
                     />
                   </Link>
                   <div className="flex-1 min-w-0">
@@ -129,10 +130,10 @@ export function RecentTakes({ takes, maxItems = 5, onTakeUpdate }: RecentTakesPr
               /* View Mode */
               <div className="flex items-start gap-3">
                 <Link to={`/album/${take.album.id}`}>
-                  <img
+                  <AlbumCover
                     src={take.album.coverUrl}
                     alt={take.album.title}
-                    className="w-14 h-14 rounded-lg object-cover shadow-md hover:shadow-lg transition-shadow"
+                    className="w-14 h-14 rounded-lg shadow-md hover:shadow-lg transition-shadow"
                   />
                 </Link>
                 <div className="flex-1 min-w-0">

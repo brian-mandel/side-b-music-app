@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { RatingStars } from "@/components/RatingStars";
 import { Link } from "react-router-dom";
 import { Album, Rating, mockAlbums } from "@/data/mockData";
+import { AlbumCover } from "@/components/AlbumCover";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -192,10 +193,10 @@ export function AllTakes({ takes, onEditTake }: AllTakesProps) {
             >
               <div className="flex items-start gap-3">
                 <Link to={`/album/${take.album.id}`}>
-                  <img
+                  <AlbumCover
                     src={take.album.coverUrl}
                     alt={take.album.title}
-                    className="w-12 h-12 rounded-lg object-cover shadow-md hover:shadow-lg transition-shadow"
+                    className="w-12 h-12 rounded-lg shadow-md hover:shadow-lg transition-shadow"
                   />
                 </Link>
                 <div className="flex-1 min-w-0">
