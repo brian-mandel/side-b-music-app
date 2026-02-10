@@ -73,7 +73,7 @@ export function RecentTakes({ takes, maxItems = 5, onTakeUpdate }: RecentTakesPr
                 <div className="flex items-start gap-3">
                   <Link to={`/album/${take.album.id}`}>
                     <AlbumCover
-                      src={take.album.coverUrl}
+                      src={take.album.cover_image_url}
                       alt={take.album.title}
                       className="w-14 h-14 rounded-lg shadow-md"
                     />
@@ -131,7 +131,7 @@ export function RecentTakes({ takes, maxItems = 5, onTakeUpdate }: RecentTakesPr
               <div className="flex items-start gap-3">
                 <Link to={`/album/${take.album.id}`}>
                   <AlbumCover
-                    src={take.album.coverUrl}
+                    src={take.album.cover_image_url}
                     alt={take.album.title}
                     className="w-14 h-14 rounded-lg shadow-md hover:shadow-lg transition-shadow"
                   />

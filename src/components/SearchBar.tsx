@@ -103,7 +103,7 @@ import { AlbumCover } from "./AlbumCover";
                    className="flex items-center gap-3 flex-1 min-w-0"
                  >
                     <AlbumCover
-                      src={album.coverUrl}
+                      src={album.cover_image_url}
                       alt={album.title}
                       className="w-10 h-10 rounded"
                     />

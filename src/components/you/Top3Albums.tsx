@@ -112,7 +112,7 @@ export function Top3Albums({ albums, onUpdate }: Top3AlbumsProps) {
                   {album ? (
                     <>
                        <AlbumCover
-                         src={album.coverUrl}
+                         src={album.cover_image_url}
                          alt={album.title}
                          className="w-full h-full rounded-none"
                        />
@@ -169,7 +169,7 @@ export function Top3Albums({ albums, onUpdate }: Top3AlbumsProps) {
                         className="w-full flex items-center gap-3 p-2 hover:bg-secondary/50 rounded-lg transition-colors text-left"
                       >
                          <AlbumCover
-                           src={album.coverUrl}
+                           src={album.cover_image_url}
                            alt={album.title}
                            className="w-10 h-10 rounded"
                          />

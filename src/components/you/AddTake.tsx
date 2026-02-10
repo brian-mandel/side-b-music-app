@@ -93,7 +93,7 @@ export function AddTake({ onTakeSubmitted }: AddTakeProps) {
                     className="w-full flex items-center gap-3 p-3 hover:bg-secondary/50 transition-colors text-left"
                   >
                     <AlbumCover
-                      src={album.coverUrl}
+                      src={album.cover_image_url}
                       alt={album.title}
                       className="w-12 h-12 rounded"
                     />
@@ -124,7 +124,7 @@ export function AddTake({ onTakeSubmitted }: AddTakeProps) {
           {/* Selected Album */}
           <div className="flex items-start gap-4 p-4 rounded-xl bg-background border border-border">
             <AlbumCover
-              src={selectedAlbum.coverUrl}
+              src={selectedAlbum.cover_image_url}
               alt={selectedAlbum.title}
               className="w-20 h-20 rounded-lg shadow-md"
             />

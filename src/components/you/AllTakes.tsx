@@ -194,7 +194,7 @@ export function AllTakes({ takes, onEditTake }: AllTakesProps) {
               <div className="flex items-start gap-3">
                 <Link to={`/album/${take.album.id}`}>
                   <AlbumCover
-                    src={take.album.coverUrl}
+                    src={take.album.cover_image_url}
                     alt={take.album.title}
                     className="w-12 h-12 rounded-lg shadow-md hover:shadow-lg transition-shadow"
                   />

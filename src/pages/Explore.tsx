@@ -39,7 +39,7 @@
                    id={album.id}
                    title={album.title}
                    artist={album.artist}
-                   coverUrl={album.coverUrl}
+                    cover_image_url={album.cover_image_url}
                    rating={album.averageRating}
                    releaseYear={album.releaseYear}
                    size="md"
@@ -60,7 +60,7 @@
                        id={album.id}
                        title={album.title}
                        artist={album.artist}
-                       coverUrl={album.coverUrl}
+                       cover_image_url={album.cover_image_url}
                        rating={album.averageRating}
                        releaseYear={album.releaseYear}
                        size="md"
