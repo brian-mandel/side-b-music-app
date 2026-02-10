@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RatingProvider } from "@/hooks/useRatingDialog";
+import { TakesProvider } from "@/hooks/useTakes";
 import YourPage from "./pages/YourPage";
 import Feed from "./pages/Feed";
 import Friends from "./pages/Friends";
@@ -19,6 +20,7 @@ const App = () => (
     <TooltipProvider>
       <BrowserRouter>
         <RatingProvider>
+        <TakesProvider>
           <Toaster />
           <Sonner />
           <Routes>
@@ -32,6 +34,7 @@ const App = () => (
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
+        </TakesProvider>
          </RatingProvider>
        </BrowserRouter>
      </TooltipProvider>
