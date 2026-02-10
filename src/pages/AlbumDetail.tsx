@@ -58,7 +58,7 @@ const AlbumDetail = () => {
         <div className="flex flex-col md:flex-row gap-6 mb-8">
           <div className="shrink-0">
             <AlbumCover
-              src={album.coverUrl}
+              src={album.cover_image_url}
               alt={album.title}
               className="w-full md:w-64 h-auto md:h-64 rounded-xl shadow-lg"
             />
@@ -191,7 +191,7 @@ const AlbumDetail = () => {
           id: album.id,
           title: album.title,
           artist: album.artist,
-          coverUrl: album.coverUrl,
+          cover_image_url: album.cover_image_url,
         }}
         sharedFriendsCount={0}
         open={shareOpen}

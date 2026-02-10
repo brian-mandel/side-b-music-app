@@ -104,7 +104,7 @@ const Index = () => {
                 id={album.id}
                 title={album.title}
                 artist={album.artist}
-                coverUrl={album.coverUrl}
+                cover_image_url={album.cover_image_url}
                 releaseYear={album.releaseYear}
                 showRating={false}
                 size="md"
@@ -161,7 +161,7 @@ const Index = () => {
                     id: take.album.id,
                     title: take.album.title,
                     artist: take.album.artist,
-                    coverUrl: take.album.coverUrl,
+                    cover_image_url: take.album.cover_image_url,
                   }}
                   rating={take.rating}
                   comment={take.comment}

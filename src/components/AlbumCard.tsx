@@ -13,7 +13,7 @@ interface AlbumCardProps {
   id: string;
   title: string;
   artist: string;
-  coverUrl: string;
+  cover_image_url: string | null;
   rating?: number;
   userRating?: number;
   releaseYear?: number;
@@ -48,7 +48,7 @@ export function AlbumCard({
   id,
   title,
   artist,
-  coverUrl,
+  cover_image_url,
   rating,
   userRating,
   releaseYear,
@@ -130,7 +130,7 @@ export function AlbumCard({
           )}
         >
           <AlbumCover
-            src={coverUrl}
+            src={cover_image_url}
             alt={`${title} by ${artist}`}
             className="album-cover w-full h-full rounded-none"
           />
@@ -180,7 +180,7 @@ export function AlbumCard({
       </Link>
 
       <ShareAlbumDialog
-        album={{ id, title, artist, coverUrl }}
+        album={{ id, title, artist, cover_image_url }}
         sharedFriendsCount={sharedFriendsCount}
         open={shareOpen}
         onOpenChange={setShareOpen}

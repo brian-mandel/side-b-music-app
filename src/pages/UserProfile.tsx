@@ -106,7 +106,7 @@
                      id: rating.album.id,
                      title: rating.album.title,
                      artist: rating.album.artist,
-                     coverUrl: rating.album.coverUrl,
+                     cover_image_url: rating.album.cover_image_url,
                    }}
                    rating={rating.rating}
                    comment={rating.comment}

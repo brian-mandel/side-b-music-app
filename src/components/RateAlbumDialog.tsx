@@ -61,7 +61,7 @@ import { AlbumCover } from "./AlbumCover";
  
          <div className="flex gap-4 mt-2">
             <AlbumCover
-              src={album.coverUrl}
+              src={album.cover_image_url}
               alt={album.title}
               className="w-20 h-20 rounded-lg shadow-md"
             />

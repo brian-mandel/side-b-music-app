@@ -17,7 +17,7 @@ interface ShareAlbumDialogProps {
     id: string;
     title: string;
     artist: string;
-    coverUrl: string;
+    cover_image_url: string | null;
   };
   sharedFriendsCount: number;
   open: boolean;
@@ -59,7 +59,7 @@ export function ShareAlbumDialog({ album, sharedFriendsCount, open, onOpenChange
 
         <div className="flex items-center gap-4 mb-4">
           <AlbumCover
-            src={album.coverUrl}
+            src={album.cover_image_url}
             alt={album.title}
             className="w-16 h-16 rounded-lg"
           />

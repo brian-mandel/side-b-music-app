@@ -17,7 +17,7 @@ import { AlbumCover } from "./AlbumCover";
      id: string;
      title: string;
      artist: string;
-     coverUrl: string;
+     cover_image_url: string | null;
    };
    rating: number;
    comment: string;
@@ -54,7 +54,7 @@ import { AlbumCover } from "./AlbumCover";
          {showAlbum && album && (
            <Link to={`/album/${album.id}`} className="shrink-0">
               <AlbumCover
-                src={album.coverUrl}
+                src={album.cover_image_url}
                 alt={album.title}
                 className="w-16 h-16 rounded-lg"
               />

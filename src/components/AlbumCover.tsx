@@ -3,14 +3,15 @@ import { cn } from "@/lib/utils";
 import { Disc3 } from "lucide-react";
 
 interface AlbumCoverProps {
-  src?: string;
+  src?: string | null;
   alt: string;
   className?: string;
   onError?: () => void;
-  shadow?: boolean;
 }
 
-export function AlbumCover({ src, alt, className, onError, shadow = true }: AlbumCoverProps) {
+const ALBUM_COVER_STYLE = "aspect-square rounded-lg shadow-[0_4px_12px_rgba(0,0,0,0.25)]";
+
+export function AlbumCover({ src, alt, className, onError }: AlbumCoverProps) {
   const [failed, setFailed] = useState(!src);
 
   const handleError = () => {
@@ -18,14 +19,12 @@ export function AlbumCover({ src, alt, className, onError, shadow = true }: Albu
     onError?.();
   };
 
-  const shadowClass = shadow ? "shadow-[0_4px_12px_rgba(0,0,0,0.25)]" : "";
-
-  if (failed) {
+  if (failed || !src) {
     return (
       <div
         className={cn(
-          "aspect-square bg-muted flex items-center justify-center",
-          shadowClass,
+          ALBUM_COVER_STYLE,
+          "bg-muted flex items-center justify-center",
           className
         )}
         aria-label={alt}
@@ -39,7 +38,7 @@ export function AlbumCover({ src, alt, className, onError, shadow = true }: Albu
     <img
       src={src}
       alt={alt}
-      className={cn("aspect-square object-cover", shadowClass, className)}
+      className={cn(ALBUM_COVER_STYLE, "object-cover", className)}
       onError={handleError}
       loading="lazy"
     />
