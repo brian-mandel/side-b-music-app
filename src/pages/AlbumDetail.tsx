@@ -5,10 +5,10 @@ import { CommentCard } from "@/components/CommentCard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, Share2, Bookmark, BookmarkCheck, Play, ChevronDown } from "lucide-react";
+import { ArrowLeft, Share2, Bookmark, BookmarkCheck, Play, ChevronDown, Lock } from "lucide-react";
 import { getAlbumById, getUserById, type StreamingLinks } from "@/data/mockData";
 import { AlbumCover } from "@/components/AlbumCover";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useTakes } from "@/hooks/useTakes";
 import { ShareAlbumDialog } from "@/components/ShareAlbumDialog";
 import { toast } from "sonner";
@@ -35,7 +35,9 @@ const AlbumDetail = () => {
   const [userRating, setUserRating] = useState(0);
   const [comment, setComment] = useState("");
   const [shareOpen, setShareOpen] = useState(false);
+  const [discussionComment, setDiscussionComment] = useState("");
   const { isSaved, toggleSave } = useSavedAlbums();
+  const takeComposerRef = useRef<HTMLDivElement>(null);
 
   if (!album) {
     return (
@@ -159,6 +161,7 @@ const AlbumDetail = () => {
         </div>
 
         {/* Add a Take */}
+        <div ref={takeComposerRef}>
         <section className="p-6 rounded-xl bg-primary text-primary-foreground border border-border mb-8">
           <h2 className="text-lg font-display font-semibold mb-4">
             {existingTake ? "Update Your Take" : "Add Your Take"}
@@ -200,6 +203,7 @@ const AlbumDetail = () => {
             <span className="text-xs text-primary-foreground">{comment.length}/500</span>
           </div>
         </section>
+        </div>
 
         {/* Discussion */}
         <section>
@@ -208,7 +212,7 @@ const AlbumDetail = () => {
           </h2>
           <div className="space-y-4">
             {albumTakes.length > 0 ? (
-              albumTakes.map((take) => {
+               albumTakes.map((take) => {
                 const user = getUserById(take.userId);
                 return (
                   <CommentCard
@@ -225,6 +229,10 @@ const AlbumDetail = () => {
                     replies={take.replies}
                     createdAt={take.createdAt}
                     showAlbum={false}
+                    canInteract={!!existingTake}
+                    onGatedAction={() => {
+                      takeComposerRef.current?.scrollIntoView({ behavior: "smooth" });
+                    }}
                   />
                 );
               })
@@ -234,6 +242,42 @@ const AlbumDetail = () => {
               </p>
             )}
           </div>
+
+          {/* Discussion comment input */}
+          {existingTake ? (
+            <div className="mt-6 flex gap-3">
+              <Textarea
+                placeholder="Add to the discussion…"
+                value={discussionComment}
+                onChange={(e) => setDiscussionComment(e.target.value.slice(0, 500))}
+                className="bg-card border-border focus:border-primary"
+                rows={2}
+              />
+              <Button
+                disabled={!discussionComment.trim()}
+                onClick={() => {
+                  toast.success("Comment posted!");
+                  setDiscussionComment("");
+                }}
+                className="shrink-0 bg-gradient-warm text-primary-foreground hover:opacity-90"
+              >
+                Post
+              </Button>
+            </div>
+          ) : (
+            <div className="mt-6 p-5 rounded-xl bg-card border border-border text-center">
+              <Lock className="w-5 h-5 text-muted-foreground mx-auto mb-2" />
+              <p className="text-sm font-semibold text-foreground mb-1">Post your take to join the discussion</p>
+              <p className="text-xs text-muted-foreground mb-3">To comment on takes for this album, add your own take first.</p>
+              <Button
+                size="sm"
+                onClick={() => takeComposerRef.current?.scrollIntoView({ behavior: "smooth" })}
+                className="bg-gradient-warm text-primary-foreground hover:opacity-90"
+              >
+                Add your take
+              </Button>
+            </div>
+          )}
         </section>
       </div>
 
