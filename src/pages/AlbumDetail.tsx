@@ -5,10 +5,10 @@ import { CommentCard } from "@/components/CommentCard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, Share2, Bookmark, BookmarkCheck, Play, ChevronDown, Lock } from "lucide-react";
+import { ArrowLeft, Share2, Bookmark, BookmarkCheck, Play, ChevronDown, Lock, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 import { getAlbumById, getUserById, type StreamingLinks } from "@/data/mockData";
 import { AlbumCover } from "@/components/AlbumCover";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useTakes } from "@/hooks/useTakes";
 import { ShareAlbumDialog } from "@/components/ShareAlbumDialog";
 import { toast } from "sonner";
@@ -31,11 +31,13 @@ const PLATFORMS: { key: keyof StreamingLinks; label: string }[] = [
 const AlbumDetail = () => {
   const { id } = useParams<{ id: string }>();
   const album = getAlbumById(id || "1");
-  const { addTake, getUserTakeForAlbum, getTakesForAlbum } = useTakes();
+  const { addTake, getUserTakeForAlbum, getTakesForAlbum, deleteTake } = useTakes();
   const [userRating, setUserRating] = useState(0);
   const [comment, setComment] = useState("");
   const [shareOpen, setShareOpen] = useState(false);
   const [discussionComment, setDiscussionComment] = useState("");
+  const [editing, setEditing] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const { isSaved, toggleSave } = useSavedAlbums();
   const takeComposerRef = useRef<HTMLDivElement>(null);
 
@@ -55,7 +57,32 @@ const AlbumDetail = () => {
   const handleSubmit = () => {
     if (userRating === 0) return;
     addTake(album.id, userRating, comment);
-    toast.success("Take posted!");
+    toast.success(editing ? "Take updated!" : "Take posted!");
+    setUserRating(0);
+    setComment("");
+    setEditing(false);
+  };
+
+  const handleStartEdit = () => {
+    if (existingTake) {
+      setUserRating(existingTake.rating);
+      setComment(existingTake.comment);
+      setEditing(true);
+      setMenuOpen(false);
+      setTimeout(() => takeComposerRef.current?.scrollIntoView({ behavior: "smooth" }), 100);
+    }
+  };
+
+  const handleDelete = () => {
+    if (existingTake) {
+      deleteTake(existingTake.id);
+      toast.success("Take deleted");
+      setMenuOpen(false);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditing(false);
     setUserRating(0);
     setComment("");
   };
@@ -160,49 +187,93 @@ const AlbumDetail = () => {
           </div>
         </div>
 
-        {/* Add a Take */}
+        {/* Take section */}
         <div ref={takeComposerRef}>
-        <section className="p-6 rounded-xl bg-primary text-primary-foreground border border-border mb-8">
-          <h2 className="text-lg font-display font-semibold mb-4">
-            {existingTake ? "Update Your Take" : "Add Your Take"}
-          </h2>
-          {existingTake && (
-            <div className="mb-4 p-3 rounded-lg bg-secondary/50 border border-border/50">
-              <p className="text-xs text-muted-foreground mb-1">Your current take</p>
-              <div className="flex items-center gap-2">
-                <RatingStars rating={existingTake.rating} size="sm" />
+        {existingTake && !editing ? (
+          /* Compact "Your Take" card with context menu */
+          <section
+            className="p-4 rounded-xl bg-card border border-primary mb-8 relative"
+            onContextMenu={(e) => {
+              e.preventDefault();
+              setMenuOpen(true);
+            }}
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex-1 min-w-0">
+                <p className="text-xs text-muted-foreground mb-1.5">Your Take</p>
+                <div className="flex items-center gap-2 mb-1">
+                  <RatingStars rating={existingTake.rating} size="sm" />
+                </div>
                 {existingTake.comment && (
-                  <p className="text-sm text-foreground/80 truncate">— {existingTake.comment}</p>
+                  <p className="text-sm text-foreground/80 mt-1 line-clamp-3">
+                    {existingTake.comment}
+                  </p>
+                )}
+                <p className="text-xs text-muted-foreground mt-2">{existingTake.createdAt}</p>
+              </div>
+              <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="shrink-0 h-8 w-8 text-muted-foreground">
+                    <MoreHorizontal className="w-4 h-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="bg-popover z-50">
+                  <DropdownMenuItem onClick={handleStartEdit}>
+                    <Pencil className="w-4 h-4 mr-2" />
+                    Edit take
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleDelete} className="text-destructive focus:text-destructive">
+                    <Trash2 className="w-4 h-4 mr-2" />
+                    Delete take
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+            <p className="text-[10px] text-muted-foreground/60 mt-2">Long-press or right-click to edit</p>
+          </section>
+        ) : (
+          /* Composer (new or edit mode) */
+          <section className="p-6 rounded-xl bg-primary text-primary-foreground border border-border mb-8">
+            <h2 className="text-lg font-display font-semibold mb-4">
+              {editing ? "Edit Your Take" : "Add Your Take"}
+            </h2>
+            <div className="mb-4">
+              <RatingStars
+                rating={userRating}
+                size="lg"
+                interactive
+                onRatingChange={setUserRating}
+              />
+            </div>
+            <Textarea
+              placeholder="What's your take?"
+              value={comment}
+              onChange={(e) => setComment(e.target.value.slice(0, 500))}
+              className="mb-4 bg-white border-primary focus:border-primary text-foreground"
+              rows={3}
+            />
+            <div className="flex items-center justify-between">
+              <div className="flex gap-2">
+                <Button
+                  disabled={userRating === 0}
+                  onClick={handleSubmit}
+                  className="bg-gradient-warm text-primary-foreground hover:opacity-90"
+                >
+                  {editing ? "Save changes" : "Post Take"}
+                </Button>
+                {editing && (
+                  <Button
+                    variant="secondary"
+                    onClick={handleCancelEdit}
+                  >
+                    Cancel
+                  </Button>
                 )}
               </div>
+              <span className="text-xs text-primary-foreground">{comment.length}/500</span>
             </div>
-          )}
-          <div className="mb-4">
-            <RatingStars
-              rating={userRating}
-              size="lg"
-              interactive
-              onRatingChange={setUserRating}
-            />
-          </div>
-          <Textarea
-            placeholder="What's your take?"
-            value={comment}
-            onChange={(e) => setComment(e.target.value.slice(0, 500))}
-            className="mb-4 bg-white border-primary focus:border-primary"
-            rows={3}
-          />
-          <div className="flex items-center justify-between">
-            <Button
-              disabled={userRating === 0}
-              onClick={handleSubmit}
-              className="bg-gradient-warm text-primary-foreground hover:opacity-90"
-            >
-              Post Take
-            </Button>
-            <span className="text-xs text-primary-foreground">{comment.length}/500</span>
-          </div>
-        </section>
+          </section>
+        )}
         </div>
 
         {/* Discussion */}
