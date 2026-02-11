@@ -11,7 +11,7 @@ import { mockUsers } from "@/data/mockData";
 import { useTheme, ThemeName } from "@/hooks/useTheme";
 
 const themes: { value: ThemeName; label: string; description: string }[] = [
-  { value: "light", label: "Light", description: "Clean light theme" },
+  { value: "default", label: "Light", description: "Clean light theme" },
   { value: "dark", label: "Dark", description: "Standard dark mode" },
   { value: "brutalist-night", label: "Brutalist Night", description: "Bold brutalist with warm amber accents" },
 ];
