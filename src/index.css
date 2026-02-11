@@ -60,7 +60,7 @@
 
      /* Rating stars */
      --star-filled: 45 95% 55%;
-     --star-empty: 240 6% 25%;
+     --star-empty: 0 0% 100%;
 
      /* Sidebar */
      --sidebar-background: 240 10% 8%;
