@@ -74,7 +74,7 @@ const AlbumDetail = () => {
             <AlbumCover
               src={album.cover_image_url}
               alt={album.title}
-              className="w-full md:w-64 h-auto md:h-64 rounded-xl shadow-lg"
+              className="w-full md:w-64 rounded-xl shadow-lg"
             />
           </div>
 
