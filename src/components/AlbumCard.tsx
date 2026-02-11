@@ -132,7 +132,7 @@ export function AlbumCard({
           <AlbumCover
             src={cover_image_url}
             alt={`${title} by ${artist}`}
-            className="album-cover w-full h-full rounded-none"
+            className="album-cover w-full h-full rounded-none shadow-none"
           />
           {userRating && (
             <div className="absolute bottom-2 left-2 px-2 py-1 rounded-md bg-background/90 backdrop-blur-sm">
