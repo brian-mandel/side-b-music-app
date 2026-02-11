@@ -51,15 +51,15 @@ import { AlbumCover } from "./AlbumCover";
        style={style}
      >
        <div className="flex gap-3">
-         {showAlbum && album && (
-           <Link to={`/album/${album.id}`} className="shrink-0">
-              <AlbumCover
-                src={album.cover_image_url}
-                alt={album.title}
-                className="w-16 h-16 rounded-lg"
-              />
-           </Link>
-         )}
+          {showAlbum && album && (
+            <Link to={`/album/${album.id}`} className="shrink-0 p-1">
+               <AlbumCover
+                 src={album.cover_image_url}
+                 alt={album.title}
+                 className="w-16 h-16 rounded-lg"
+               />
+            </Link>
+          )}
          
          <div className="flex-1 min-w-0">
            <div className="flex items-start justify-between gap-2">
