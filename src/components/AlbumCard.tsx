@@ -125,7 +125,7 @@ export function AlbumCard({
       >
         <div
           className={cn(
-            "relative overflow-hidden rounded-lg",
+            "relative overflow-visible rounded-lg",
             coverSizeClasses[size]
           )}
         >
