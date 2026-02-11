@@ -9,7 +9,8 @@ import { Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTakes } from "@/hooks/useTakes";
 
-const newReleases = mockAlbums.filter((a) => a.isNewRelease);
+const newReleaseIds = ["15", "16", "17", "18"];
+const newReleases = mockAlbums.filter((a) => newReleaseIds.includes(a.id));
 const trendingIds = ["11", "12", "13", "14"];
 const trendingAlbums = mockAlbums.filter((a) => trendingIds.includes(a.id));
 
