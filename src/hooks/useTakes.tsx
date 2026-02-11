@@ -10,6 +10,7 @@ interface TakesContextType {
   allTakes: TakeWithAlbum[];
   addTake: (albumId: string, rating: number, comment: string) => void;
   updateTake: (takeId: string, rating: number, comment: string) => void;
+  deleteTake: (takeId: string) => void;
   getUserTakeForAlbum: (albumId: string) => TakeWithAlbum | undefined;
   getTakesForAlbum: (albumId: string) => TakeWithAlbum[];
 }
@@ -83,6 +84,10 @@ export function TakesProvider({ children }: { children: ReactNode }) {
     );
   }, []);
 
+  const deleteTake = useCallback((takeId: string) => {
+    setStoredTakes((prev) => prev.filter((t) => t.id !== takeId));
+  }, []);
+
   const getUserTakeForAlbum = useCallback(
     (albumId: string) => userTakes.find((t) => t.albumId === albumId),
     [userTakes]
@@ -95,7 +100,7 @@ export function TakesProvider({ children }: { children: ReactNode }) {
 
   return (
     <TakesContext.Provider
-      value={{ userTakes, allTakes, addTake, updateTake, getUserTakeForAlbum, getTakesForAlbum }}
+      value={{ userTakes, allTakes, addTake, updateTake, deleteTake, getUserTakeForAlbum, getTakesForAlbum }}
     >
       {children}
     </TakesContext.Provider>
