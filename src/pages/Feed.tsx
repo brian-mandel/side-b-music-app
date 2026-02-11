@@ -40,7 +40,7 @@ const Index = () => {
         {/* Welcome */}
         <section className="mb-8">
           <h1 className="text-3xl lg:text-4xl font-display font-bold mb-2">
-            Welcome back, <span className="text-slate-400">Alex</span>
+            Welcome back, <span className="text-primary">Alex</span>
           </h1>
           <p className="text-muted-foreground">
             See what people are saying about albums and join the conversation.
