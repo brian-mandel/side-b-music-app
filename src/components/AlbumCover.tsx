@@ -9,7 +9,7 @@ interface AlbumCoverProps {
   onError?: () => void;
 }
 
-const ALBUM_SHADOW = "shadow-[0_6px_14px_rgba(0,0,0,0.25),0_2px_6px_rgba(0,0,0,0.15)]";
+const ALBUM_SHADOW = "";
 
 export function AlbumCover({ src, alt, className, onError }: AlbumCoverProps) {
   const [failed, setFailed] = useState(!src);
