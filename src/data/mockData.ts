@@ -406,7 +406,7 @@ export const mockRatings: Rating[] = [
 ];
 
 // Deterministic hot take IDs for the demo
-export const demoHotTakeIds = ["6", "7", "8", "9", "10", "11t", "12t", "13t"];
+export const demoHotTakeIds = ["6", "7", "8", "10", "11t", "12t", "13t"];
  
  // Helper function to get user by id
  export const getUserById = (id: string): User | undefined =>

@@ -57,7 +57,8 @@ const Index = () => {
                 !seededIds.has(t.id) &&
                 !topTakeIds.has(t.id) &&
                 t.comment &&
-                t.comment.trim().length > 0
+                t.comment.trim().length > 0 &&
+                (t.rating <= 2 || (t.rating >= 5 && t.rating > t.album.averageRating + 0.5))
             )
             .map((t) => {
               const deviation = Math.abs(t.rating - t.album.averageRating);
