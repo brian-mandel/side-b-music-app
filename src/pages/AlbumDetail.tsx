@@ -95,7 +95,7 @@ const AlbumDetail = () => {
             </p>
 
             <div className="flex items-center gap-4 mb-6">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 [--star-empty:216_19%_26%]">
                 <RatingStars rating={album.averageRating} size="lg" />
                 <span className="text-2xl font-bold text-gradient">
                   {album.averageRating.toFixed(1)}
