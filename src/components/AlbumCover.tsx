@@ -9,7 +9,7 @@ interface AlbumCoverProps {
   onError?: () => void;
 }
 
-const SHADOW = "shadow-[0_6px_14px_rgba(0,0,0,0.25)]";
+const ALBUM_SHADOW = "shadow-[0_6px_14px_rgba(0,0,0,0.25),0_2px_6px_rgba(0,0,0,0.15)]";
 
 export function AlbumCover({ src, alt, className, onError }: AlbumCoverProps) {
   const [failed, setFailed] = useState(!src);
@@ -20,10 +20,10 @@ export function AlbumCover({ src, alt, className, onError }: AlbumCoverProps) {
   };
 
   return (
-    <div className={cn("aspect-square rounded-lg overflow-hidden", SHADOW, className)}>
+    <div className={cn("aspect-square rounded-lg", ALBUM_SHADOW, className)}>
       {failed || !src ? (
         <div
-          className="w-full h-full bg-muted flex items-center justify-center"
+          className="w-full h-full rounded-[inherit] overflow-hidden bg-muted flex items-center justify-center"
           aria-label={alt}
         >
           <Disc3 className="w-1/3 h-1/3 text-muted-foreground/50" />
@@ -32,7 +32,7 @@ export function AlbumCover({ src, alt, className, onError }: AlbumCoverProps) {
         <img
           src={src}
           alt={alt}
-          className="w-full h-full object-cover"
+          className="w-full h-full rounded-[inherit] overflow-hidden object-cover"
           onError={handleError}
           loading="lazy"
         />
