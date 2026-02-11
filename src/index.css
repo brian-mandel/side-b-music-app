@@ -141,8 +141,48 @@
      --shadow-lg: 5px 5px 0px -10px hsl(0, 0%, 100%);
      --shadow-xl: 16px 16px 0px 0px #ffffff;
      --shadow-2xl: 24px 24px 0px 0px #ffffff;
-     --radius: 0rem}
- }
+      --radius: 0rem;
+  }
+
+  .brutalist-night {
+    --background: 240 10% 6%;
+    --foreground: 45 20% 90%;
+    --card: 240 10% 9%;
+    --card-foreground: 45 20% 90%;
+    --popover: 240 10% 9%;
+    --popover-foreground: 45 20% 90%;
+    --primary: 32 95% 55%;
+    --primary-foreground: 240 10% 6%;
+    --secondary: 240 8% 14%;
+    --secondary-foreground: 45 20% 90%;
+    --muted: 240 8% 14%;
+    --muted-foreground: 240 6% 55%;
+    --accent: 32 80% 50%;
+    --accent-foreground: 240 10% 6%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 32 60% 40%;
+    --input: 240 8% 18%;
+    --ring: 32 95% 55%;
+    --radius: 0rem;
+    --shadow-2xs: 1px 1px 0px 0px hsl(32 95% 55%);
+    --shadow-xs: 2px 2px 0px 0px hsl(32 95% 55%);
+    --shadow-sm: 3px 3px 0px 0px hsl(32 95% 55%);
+    --shadow-md: 5px 5px 0px 0px hsl(32 95% 55%);
+    --shadow: 5px 5px 0px 0px hsl(32 95% 55%);
+    --shadow-lg: 8px 8px 0px 0px hsl(32 95% 55%);
+    --shadow-xl: 12px 12px 0px 0px hsl(32 95% 55%);
+    --shadow-2xl: 18px 18px 0px 0px hsl(32 95% 55%);
+    --sidebar: 240 10% 5%;
+    --sidebar-foreground: 45 20% 90%;
+    --sidebar-primary: 32 95% 55%;
+    --sidebar-primary-foreground: 240 10% 6%;
+    --sidebar-accent: 240 8% 14%;
+    --sidebar-accent-foreground: 45 20% 90%;
+    --sidebar-border: 32 60% 40%;
+    --sidebar-ring: 32 95% 55%;
+  }
+  }
 
  @layer base {
    * {

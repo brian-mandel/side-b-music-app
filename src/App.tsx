@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RatingProvider } from "@/hooks/useRatingDialog";
 import { TakesProvider } from "@/hooks/useTakes";
+import { ThemeProvider } from "@/hooks/useTheme";
 import YourPage from "./pages/YourPage";
 import Feed from "./pages/Feed";
 import Friends from "./pages/Friends";
@@ -17,6 +18,7 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+    <ThemeProvider>
     <TooltipProvider>
       <BrowserRouter>
         <RatingProvider>
@@ -38,6 +40,7 @@ const App = () => (
          </RatingProvider>
        </BrowserRouter>
      </TooltipProvider>
+    </ThemeProvider>
    </QueryClientProvider>
  );
  
