@@ -4,7 +4,7 @@ import { RatingStars } from "./RatingStars";
 import { MessageCircle, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 interface CommentCardProps {
@@ -47,6 +47,8 @@ export function CommentCard({
   className,
   style,
 }: CommentCardProps) {
+  const navigate = useNavigate();
+
   const handleGatedClick = () => {
     if (!canInteract) {
       if (onGatedAction) {
@@ -54,8 +56,11 @@ export function CommentCard({
       } else {
         toast.info("Post your take to join the discussion");
       }
-      return;
     }
+  };
+
+  const handleCommentClick = () => {
+    navigate(`/takes/${id}/discussion`);
   };
 
   return (
@@ -122,7 +127,7 @@ export function CommentCard({
               variant="ghost"
               size="sm"
               className="h-8 px-2 text-muted-foreground hover:text-primary"
-              onClick={handleGatedClick}
+              onClick={handleCommentClick}
             >
               <MessageCircle className="w-4 h-4 mr-1" />
               <span className="text-xs">{replies}</span>

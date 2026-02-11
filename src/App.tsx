@@ -13,6 +13,7 @@ import Settings from "./pages/Settings";
 import AlbumDetail from "./pages/AlbumDetail";
 import UserProfile from "./pages/UserProfile";
 import NotFound from "./pages/NotFound";
+import TakeDiscussion from "./pages/TakeDiscussion";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/settings" element={<Settings />} />
             <Route path="/album/:id" element={<AlbumDetail />} />
             <Route path="/user/:id" element={<UserProfile />} />
+            <Route path="/takes/:takeId/discussion" element={<TakeDiscussion />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
