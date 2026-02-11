@@ -372,7 +372,41 @@ export const mockRatings: Rating[] = [
     replies: 167,
     createdAt: "1 day ago",
   },
+  // --- Additional Hot Takes ---
+  {
+    id: "11t",
+    userId: "2",
+    albumId: "5",
+    rating: 2,
+    comment: "good kid, m.A.A.d city is carried entirely by two tracks. The rest is filler that people skip but won't admit it.",
+    likes: 28,
+    replies: 178,
+    createdAt: "12 hours ago",
+  },
+  {
+    id: "12t",
+    userId: "3",
+    albumId: "11",
+    rating: 1.5,
+    comment: "GNX is Kendrick coasting on reputation. Not a single memorable bar. His worst project by a mile and nobody wants to say it.",
+    likes: 41,
+    replies: 256,
+    createdAt: "6 hours ago",
+  },
+  {
+    id: "13t",
+    userId: "2",
+    albumId: "12",
+    rating: 5,
+    comment: "Brat is the most important pop album in a decade. If you don't get it, the album isn't for you and that's the point.",
+    likes: 35,
+    replies: 192,
+    createdAt: "1 day ago",
+  },
 ];
+
+// Deterministic hot take IDs for the demo
+export const demoHotTakeIds = ["6", "7", "8", "9", "10", "11t", "12t", "13t"];
  
  // Helper function to get user by id
  export const getUserById = (id: string): User | undefined =>

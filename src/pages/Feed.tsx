@@ -3,7 +3,7 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { CommentCard } from "@/components/CommentCard";
 import { AlbumCard } from "@/components/AlbumCard";
 import { SearchBar } from "@/components/SearchBar";
-import { mockAlbums, getUserById } from "@/data/mockData";
+import { mockAlbums, getUserById, demoHotTakeIds } from "@/data/mockData";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Search, X, Bookmark } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -38,18 +38,37 @@ const Index = () => {
   const displayedTakes = (() => {
     switch (takesMode) {
       case "hot": {
-        const hasComment = (t: typeof allTakes[0]) => t.comment && t.comment.trim().length > 0;
-        const maxEngagement = Math.max(1, ...allTakes.map((t) => t.likes + t.replies));
-        return [...allTakes]
-          .filter((t) => hasComment(t) && !topTakeIds.has(t.id))
-          .map((t) => {
-            const deviation = Math.abs(t.rating - t.album.averageRating);
-            const polarityBoost = t.rating <= 2 || t.rating >= 5 ? 1 : 0;
-            const engagementBoost = (t.likes + t.replies) / maxEngagement;
-            const hotScore = deviation * 2 + polarityBoost + engagementBoost * 0.5;
-            return { ...t, hotScore };
-          })
-          .sort((a, b) => b.hotScore - a.hotScore);
+        // Use seeded hot take IDs, exclude any that overlap with top takes
+        const hotTakeSet = new Set(demoHotTakeIds);
+        const seeded = allTakes.filter(
+          (t) =>
+            hotTakeSet.has(t.id) &&
+            t.comment &&
+            t.comment.trim().length > 0 &&
+            !topTakeIds.has(t.id)
+        );
+        // If seeded list is short, fill with computed hot takes
+        if (seeded.length < 6) {
+          const seededIds = new Set(seeded.map((t) => t.id));
+          const maxEngagement = Math.max(1, ...allTakes.map((t) => t.likes + t.replies));
+          const computed = allTakes
+            .filter(
+              (t) =>
+                !seededIds.has(t.id) &&
+                !topTakeIds.has(t.id) &&
+                t.comment &&
+                t.comment.trim().length > 0
+            )
+            .map((t) => {
+              const deviation = Math.abs(t.rating - t.album.averageRating);
+              const polarityBoost = t.rating <= 2 || t.rating >= 5 ? 1 : 0;
+              const engagementBoost = (t.likes + t.replies) / maxEngagement;
+              return { ...t, hotScore: deviation * 2 + polarityBoost + engagementBoost * 0.5 };
+            })
+            .sort((a, b) => b.hotScore - a.hotScore);
+          return [...seeded, ...computed].slice(0, 8);
+        }
+        return seeded;
       }
       case "top":
         return [...allTakes].sort((a, b) => b.likes + b.replies - (a.likes + a.replies));
