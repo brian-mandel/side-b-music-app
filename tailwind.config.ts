@@ -15,14 +15,17 @@
    	extend: {
    		fontFamily: {
    			sans: [
-   				'Space Grotesk',
+   				'Work Sans',
    				'ui-sans-serif',
    				'system-ui',
-   				'sans-serif',
-   				'Apple Color Emoji',
-   				'Segoe UI Emoji',
-   				'Segoe UI Symbol',
-   				'Noto Color Emoji'
+   				'-apple-system',
+   				'BlinkMacSystemFont',
+   				'Segoe UI',
+   				'Roboto',
+   				'Helvetica Neue',
+   				'Arial',
+   				'Noto Sans',
+   				'sans-serif'
    			],
    			display: [
    				'Space Grotesk',
@@ -38,7 +41,7 @@
    				'serif'
    			],
    			mono: [
-   				'Space Mono',
+   				'Inconsolata',
    				'ui-monospace',
    				'SFMono-Regular',
    				'Menlo',
