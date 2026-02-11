@@ -144,7 +144,7 @@ const AlbumDetail = () => {
         </div>
 
         {/* Add a Take */}
-        <section className="p-6 rounded-xl bg-card border border-border mb-8">
+        <section className="p-6 rounded-xl bg-primary text-primary-foreground border border-border mb-8">
           <h2 className="text-lg font-display font-semibold mb-4">
             {existingTake ? "Update Your Take" : "Add Your Take"}
           </h2>
