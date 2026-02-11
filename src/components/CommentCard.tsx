@@ -111,7 +111,11 @@ export function CommentCard({
             </Link>
           )}
 
-          <p className="mt-2 text-sm text-foreground/90 leading-relaxed">{comment}</p>
+          {comment && comment.trim().length > 0 ? (
+            <p className="mt-2 text-sm text-foreground/90 leading-relaxed">{comment}</p>
+          ) : (
+            <p className="mt-2 text-xs italic text-muted-foreground">Rating only</p>
+          )}
 
           <div className="flex items-center gap-4 mt-3">
             <Button
