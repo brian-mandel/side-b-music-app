@@ -9,7 +9,7 @@ interface AlbumCoverProps {
   onError?: () => void;
 }
 
-const ALBUM_COVER_STYLE = "aspect-square rounded-lg shadow-[0_4px_12px_rgba(0,0,0,0.25)]";
+const SHADOW = "shadow-[0_6px_14px_rgba(0,0,0,0.25)]";
 
 export function AlbumCover({ src, alt, className, onError }: AlbumCoverProps) {
   const [failed, setFailed] = useState(!src);
@@ -19,28 +19,24 @@ export function AlbumCover({ src, alt, className, onError }: AlbumCoverProps) {
     onError?.();
   };
 
-  if (failed || !src) {
-    return (
-      <div
-        className={cn(
-          ALBUM_COVER_STYLE,
-          "bg-muted flex items-center justify-center",
-          className
-        )}
-        aria-label={alt}
-      >
-        <Disc3 className="w-1/3 h-1/3 text-muted-foreground/50" />
-      </div>
-    );
-  }
-
   return (
-    <img
-      src={src}
-      alt={alt}
-      className={cn(ALBUM_COVER_STYLE, "object-cover", className)}
-      onError={handleError}
-      loading="lazy"
-    />
+    <div className={cn("aspect-square rounded-lg overflow-hidden", SHADOW, className)}>
+      {failed || !src ? (
+        <div
+          className="w-full h-full bg-muted flex items-center justify-center"
+          aria-label={alt}
+        >
+          <Disc3 className="w-1/3 h-1/3 text-muted-foreground/50" />
+        </div>
+      ) : (
+        <img
+          src={src}
+          alt={alt}
+          className="w-full h-full object-cover"
+          onError={handleError}
+          loading="lazy"
+        />
+      )}
+    </div>
   );
 }
