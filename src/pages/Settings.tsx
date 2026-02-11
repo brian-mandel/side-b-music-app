@@ -8,10 +8,18 @@ import { Switch } from "@/components/ui/switch";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { mockUsers } from "@/data/mockData";
+import { useTheme, ThemeName } from "@/hooks/useTheme";
+
+const themes: { value: ThemeName; label: string; description: string }[] = [
+  { value: "light", label: "Light", description: "Clean light theme" },
+  { value: "dark", label: "Dark", description: "Standard dark mode" },
+  { value: "brutalist-night", label: "Brutalist Night", description: "Bold brutalist with warm amber accents" },
+];
 
 const Settings = () => {
   const navigate = useNavigate();
   const user = mockUsers[0];
+  const { theme, setTheme } = useTheme();
 
   return (
     <AppLayout>
@@ -22,6 +30,29 @@ const Settings = () => {
           </Button>
           <h1 className="text-2xl lg:text-3xl font-display font-bold">Settings</h1>
         </div>
+
+        {/* Theme */}
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle className="text-lg">Theme</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {themes.map((t) => (
+              <button
+                key={t.value}
+                onClick={() => setTheme(t.value)}
+                className={`w-full text-left p-3 border-2 transition-colors ${
+                  theme === t.value
+                    ? "border-primary bg-primary/10"
+                    : "border-border hover:border-muted-foreground/30"
+                }`}
+              >
+                <p className="text-sm font-medium">{t.label}</p>
+                <p className="text-xs text-muted-foreground">{t.description}</p>
+              </button>
+            ))}
+          </CardContent>
+        </Card>
 
         {/* Profile */}
         <Card className="mb-6">
