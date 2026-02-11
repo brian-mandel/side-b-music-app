@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 
-export type ThemeName = "light" | "dark" | "brutalist-night";
+export type ThemeName = "default" | "dark" | "brutalist-night";
 
 interface ThemeContextValue {
   theme: ThemeName;
@@ -9,31 +9,30 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
-const STORAGE_KEY = "resonance-theme";
+const STORAGE_KEY = "theme";
 
-const THEME_CLASSES: Record<ThemeName, string> = {
-  light: "",
-  dark: "dark",
-  "brutalist-night": "dark brutalist-night",
-};
+const VALID_THEMES: ThemeName[] = ["default", "dark", "brutalist-night"];
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<ThemeName>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored && stored in THEME_CLASSES) return stored as ThemeName;
+      if (stored && VALID_THEMES.includes(stored as ThemeName)) return stored as ThemeName;
     } catch {}
-    return "light";
+    return "default";
   });
 
   useEffect(() => {
     const root = document.documentElement;
-    // Remove all theme classes
+    // Set data-theme attribute for CSS targeting
+    root.dataset.theme = theme;
+    // Manage dark class for Tailwind dark mode
     root.classList.remove("dark", "brutalist-night");
-    // Add new ones
-    const classes = THEME_CLASSES[theme];
-    if (classes) {
-      classes.split(" ").forEach((c) => root.classList.add(c));
+    if (theme === "dark" || theme === "brutalist-night") {
+      root.classList.add("dark");
+    }
+    if (theme === "brutalist-night") {
+      root.classList.add("brutalist-night");
     }
     try {
       localStorage.setItem(STORAGE_KEY, theme);
