@@ -53,7 +53,7 @@ export function AddTake({
   };
   return <section className="mb-8 p-6 rounded-2xl bg-gradient-to-br from-primary/5 via-card to-accent/5 border-2 shadow-lg border-primary">
       <h2 className="text-xl font-display font-bold mb-4 flex items-center gap-2">
-        <Flame className="w-5 h-5 text-primary" />
+        <Flame className="w-5 h-5 text-orange-600" />
         Add a Take
       </h2>
 
