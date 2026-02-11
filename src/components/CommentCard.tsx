@@ -52,7 +52,7 @@ import { AlbumCover } from "./AlbumCover";
      >
        <div className="flex gap-3">
           {showAlbum && album && (
-            <Link to={`/album/${album.id}`} className="shrink-0 p-1">
+            <Link to={`/album/${album.id}`} className="shrink-0 p-2 overflow-visible">
                <AlbumCover
                  src={album.cover_image_url}
                  alt={album.title}
