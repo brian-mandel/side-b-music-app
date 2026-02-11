@@ -114,9 +114,13 @@ export default function TakeDiscussion() {
                   by {rootTake.album.artist}
                 </span>
               </Link>
-              <p className="mt-2 text-sm text-foreground/90 leading-relaxed">
-                {rootTake.comment}
-              </p>
+              {rootTake.comment && rootTake.comment.trim().length > 0 ? (
+                <p className="mt-2 text-sm text-foreground/90 leading-relaxed">
+                  {rootTake.comment}
+                </p>
+              ) : (
+                <p className="mt-2 text-xs italic text-muted-foreground">Rating only</p>
+              )}
               <div className="mt-3">
                 <Button
                   variant="ghost"

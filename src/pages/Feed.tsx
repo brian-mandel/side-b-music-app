@@ -30,14 +30,27 @@ const Index = () => {
   }, [savedIds]);
 
   const displayedAlbums = albumsMode === "new" ? newReleases : albumsMode === "trending" ? trendingAlbums : savedAlbums;
+  const topTakeIds = useMemo(() => {
+    const sorted = [...allTakes].sort((a, b) => b.likes + b.replies - (a.likes + a.replies));
+    return new Set(sorted.slice(0, 10).map((t) => t.id));
+  }, [allTakes]);
+
   const displayedTakes = (() => {
     switch (takesMode) {
-      case "hot":
-        return [...allTakes].sort((a, b) => {
-          const aDeviation = Math.abs(a.rating - a.album.averageRating);
-          const bDeviation = Math.abs(b.rating - b.album.averageRating);
-          return bDeviation + b.replies - (aDeviation + a.replies);
-        });
+      case "hot": {
+        const hasComment = (t: typeof allTakes[0]) => t.comment && t.comment.trim().length > 0;
+        const maxEngagement = Math.max(1, ...allTakes.map((t) => t.likes + t.replies));
+        return [...allTakes]
+          .filter((t) => hasComment(t) && !topTakeIds.has(t.id))
+          .map((t) => {
+            const deviation = Math.abs(t.rating - t.album.averageRating);
+            const polarityBoost = t.rating <= 2 || t.rating >= 5 ? 1 : 0;
+            const engagementBoost = (t.likes + t.replies) / maxEngagement;
+            const hotScore = deviation * 2 + polarityBoost + engagementBoost * 0.5;
+            return { ...t, hotScore };
+          })
+          .sort((a, b) => b.hotScore - a.hotScore);
+      }
       case "top":
         return [...allTakes].sort((a, b) => b.likes + b.replies - (a.likes + a.replies));
       case "friends":
