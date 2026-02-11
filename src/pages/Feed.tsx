@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { CommentCard } from "@/components/CommentCard";
 import { AlbumCard } from "@/components/AlbumCard";
 import { SearchBar } from "@/components/SearchBar";
 import { mockAlbums, getUserById } from "@/data/mockData";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { Search, X } from "lucide-react";
+import { Search, X, Bookmark } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTakes } from "@/hooks/useTakes";
+import { useSavedAlbums } from "@/hooks/useSavedAlbums";
 const newReleaseIds = ["15", "16", "17", "18"];
 const newReleases = mockAlbums.filter(a => newReleaseIds.includes(a.id));
 const trendingIds = ["11", "12", "13", "14"];
@@ -16,10 +17,19 @@ const Index = () => {
   const {
     allTakes
   } = useTakes();
+  const { savedIds } = useSavedAlbums();
   const [albumsMode, setAlbumsMode] = useState("new");
   const [takesMode, setTakesMode] = useState("friends");
   const [searchOpen, setSearchOpen] = useState(false);
-  const displayedAlbums = albumsMode === "new" ? newReleases : trendingAlbums;
+
+  const savedAlbums = useMemo(() => {
+    // Reverse so most recently saved is first
+    return [...savedIds].reverse()
+      .map((id) => mockAlbums.find((a) => a.id === id))
+      .filter(Boolean) as typeof mockAlbums;
+  }, [savedIds]);
+
+  const displayedAlbums = albumsMode === "new" ? newReleases : albumsMode === "trending" ? trendingAlbums : savedAlbums;
   const displayedTakes = (() => {
     switch (takesMode) {
       case "hot":
@@ -75,13 +85,24 @@ const Index = () => {
               <ToggleGroupItem value="trending" className="text-xs px-3 py-1 h-7 data-[state=on]:bg-primary data-[state=on]:text-primary-foreground rounded-sm">
                 Trending Albums
               </ToggleGroupItem>
+              <ToggleGroupItem value="saved" className="text-xs px-3 py-1 h-7 data-[state=on]:bg-primary data-[state=on]:text-primary-foreground rounded-sm">
+                Saved Albums
+              </ToggleGroupItem>
             </ToggleGroup>
           </div>
-          <div className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 lg:mx-0 lg:px-0 scrollbar-hide">
-            {displayedAlbums.map((album, index) => <AlbumCard key={album.id} id={album.id} title={album.title} artist={album.artist} cover_image_url={album.cover_image_url} releaseYear={album.releaseYear} showRating={false} size="md" className="shrink-0" style={{
-            animationDelay: `${index * 0.1}s`
-          } as React.CSSProperties} />)}
-          </div>
+          {albumsMode === "saved" && displayedAlbums.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-10 text-center">
+              <Bookmark className="w-8 h-8 text-muted-foreground mb-2" />
+              <p className="text-sm font-medium text-foreground">No saved albums yet</p>
+              <p className="text-xs text-muted-foreground mt-1">Tap the bookmark on an album to save it here.</p>
+            </div>
+          ) : (
+            <div className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 lg:mx-0 lg:px-0 scrollbar-hide">
+              {displayedAlbums.map((album, index) => <AlbumCard key={album.id} id={album.id} title={album.title} artist={album.artist} cover_image_url={album.cover_image_url} releaseYear={album.releaseYear} showRating={false} size="md" className="shrink-0" style={{
+              animationDelay: `${index * 0.1}s`
+            } as React.CSSProperties} />)}
+            </div>
+          )}
         </section>
 
         {/* Takes */}
