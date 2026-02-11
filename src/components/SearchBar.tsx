@@ -73,7 +73,7 @@ import { AlbumCover } from "./AlbumCover";
          value={query}
          onChange={(e) => setQuery(e.target.value)}
          onFocus={() => query.length > 0 && setIsOpen(true)}
-         className="pl-10 pr-8 bg-secondary border-transparent focus:border-primary/50 focus:ring-primary/20"
+         className="pl-10 pr-8 bg-muted border-transparent focus:border-primary/50 focus:ring-primary/20"
        />
        {query && (
          <button
