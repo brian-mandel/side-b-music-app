@@ -59,7 +59,7 @@ export function Sidebar() {
            {navItems.map(item => {
           const isActive = location.pathname === item.href;
           return <li key={item.href}>
-                 <Link to={item.href} className={cn("flex flex-col items-center gap-1 px-4 py-2 rounded-lg transition-colors", isActive ? "text-primary" : "text-muted-foreground")}>
+                 <Link to={item.href} className={cn("flex flex-col items-center gap-1 px-4 py-2 rounded-lg transition-colors", isActive ? "text-primary" : "text-muted")}>
                    <item.icon className="w-5 h-5" />
                    <span className="text-[10px] font-medium">{item.label}</span>
                  </Link>
