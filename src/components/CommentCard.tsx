@@ -5,6 +5,8 @@ import { MessageCircle, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
+
 interface CommentCardProps {
   id: string;
   user: {
@@ -24,9 +26,12 @@ interface CommentCardProps {
   replies: number;
   createdAt: string;
   showAlbum?: boolean;
+  canInteract?: boolean;
+  onGatedAction?: () => void;
   className?: string;
   style?: React.CSSProperties;
 }
+
 export function CommentCard({
   id,
   user,
@@ -37,50 +42,94 @@ export function CommentCard({
   replies,
   createdAt,
   showAlbum = true,
+  canInteract = true,
+  onGatedAction,
   className,
-  style
+  style,
 }: CommentCardProps) {
-  return <div className={cn("p-4 rounded-xl bg-card border transition-colors animate-fade-in border-primary", className)} style={style}>
-       <div className="flex gap-3">
-          {showAlbum && album && <Link to={`/album/${album.id}`} className="shrink-0 p-1">
-               <AlbumCover src={album.cover_image_url} alt={album.title} className="w-16 h-16 rounded-lg" />
-            </Link>}
-         
-         <div className="flex-1 min-w-0">
-           <div className="flex items-start justify-between gap-2">
-             <div className="flex items-center gap-2">
-               <Link to={`/user/${user.id}`}>
-                 <UserAvatar name={user.name} image={user.avatar} size="sm" />
-               </Link>
-               <div className="flex flex-col">
-                 <Link to={`/user/${user.id}`} className="font-medium text-foreground hover:text-primary transition-colors">
-                   {user.name}
-                 </Link>
-                 <span className="text-xs text-muted-foreground">{createdAt}</span>
-               </div>
-             </div>
-             <RatingStars rating={rating} size="sm" />
-           </div>
-           
-           {showAlbum && album && <Link to={`/album/${album.id}`} className="block mt-1 text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
-               {album.title} <span className="text-muted-foreground">by {album.artist}</span>
-             </Link>}
-           
-           <p className="mt-2 text-sm text-foreground/90 leading-relaxed">
-             {comment}
-           </p>
-           
-           <div className="flex items-center gap-4 mt-3">
-             <Button variant="ghost" size="sm" className="h-8 px-2 text-muted-foreground hover:text-primary">
-               <Heart className="w-4 h-4 mr-1" />
-               <span className="text-xs">{likes}</span>
-             </Button>
-             <Button variant="ghost" size="sm" className="h-8 px-2 text-muted-foreground hover:text-primary">
-               <MessageCircle className="w-4 h-4 mr-1" />
-               <span className="text-xs">{replies}</span>
-             </Button>
-           </div>
-         </div>
-       </div>
-     </div>;
+  const handleGatedClick = () => {
+    if (!canInteract) {
+      if (onGatedAction) {
+        onGatedAction();
+      } else {
+        toast.info("Post your take to join the discussion");
+      }
+      return;
+    }
+  };
+
+  return (
+    <div
+      className={cn(
+        "p-4 rounded-xl bg-card border transition-colors animate-fade-in border-primary",
+        className
+      )}
+      style={style}
+    >
+      <div className="flex gap-3">
+        {showAlbum && album && (
+          <Link to={`/album/${album.id}`} className="shrink-0 p-1">
+            <AlbumCover
+              src={album.cover_image_url}
+              alt={album.title}
+              className="w-16 h-16 rounded-lg"
+            />
+          </Link>
+        )}
+
+        <div className="flex-1 min-w-0">
+          <div className="flex items-start justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <Link to={`/user/${user.id}`}>
+                <UserAvatar name={user.name} image={user.avatar} size="sm" />
+              </Link>
+              <div className="flex flex-col">
+                <Link
+                  to={`/user/${user.id}`}
+                  className="font-medium text-foreground hover:text-primary transition-colors"
+                >
+                  {user.name}
+                </Link>
+                <span className="text-xs text-muted-foreground">{createdAt}</span>
+              </div>
+            </div>
+            <RatingStars rating={rating} size="sm" />
+          </div>
+
+          {showAlbum && album && (
+            <Link
+              to={`/album/${album.id}`}
+              className="block mt-1 text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+            >
+              {album.title}{" "}
+              <span className="text-muted-foreground">by {album.artist}</span>
+            </Link>
+          )}
+
+          <p className="mt-2 text-sm text-foreground/90 leading-relaxed">{comment}</p>
+
+          <div className="flex items-center gap-4 mt-3">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-8 px-2 text-muted-foreground hover:text-primary"
+              onClick={handleGatedClick}
+            >
+              <Heart className="w-4 h-4 mr-1" />
+              <span className="text-xs">{likes}</span>
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-8 px-2 text-muted-foreground hover:text-primary"
+              onClick={handleGatedClick}
+            >
+              <MessageCircle className="w-4 h-4 mr-1" />
+              <span className="text-xs">{replies}</span>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
