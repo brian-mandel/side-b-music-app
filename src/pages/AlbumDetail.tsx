@@ -182,7 +182,7 @@ const AlbumDetail = () => {
             >
               Post Take
             </Button>
-            <span className="text-xs text-muted-foreground">{comment.length}/500</span>
+            <span className="text-xs text-primary-foreground">{comment.length}/500</span>
           </div>
         </section>
 
