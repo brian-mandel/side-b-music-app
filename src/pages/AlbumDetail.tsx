@@ -171,7 +171,7 @@ const AlbumDetail = () => {
             placeholder="What's your take?"
             value={comment}
             onChange={(e) => setComment(e.target.value.slice(0, 500))}
-            className="mb-4 bg-secondary border-transparent focus:border-primary/50"
+            className="mb-4 bg-white border-primary focus:border-primary"
             rows={3}
           />
           <div className="flex items-center justify-between">
