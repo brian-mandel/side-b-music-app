@@ -15,7 +15,7 @@
    	extend: {
    		fontFamily: {
    			sans: [
-   				'Space Grotesk',
+   				'DM Sans',
    				'ui-sans-serif',
    				'system-ui',
    				'-apple-system',
@@ -32,7 +32,7 @@
    				'sans-serif'
    			],
    			serif: [
-   				'Lora',
+   				'Crimson Pro',
    				'ui-serif',
    				'Georgia',
    				'Cambria',
@@ -41,7 +41,7 @@
    				'serif'
    			],
    			mono: [
-   				'Space Mono',
+   				'SF Mono',
    				'ui-monospace',
    				'SFMono-Regular',
    				'Menlo',
