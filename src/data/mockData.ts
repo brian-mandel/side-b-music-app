@@ -11,6 +11,14 @@
    ratingsCount: number;
  }
  
+export interface StreamingLinks {
+  spotify?: string;
+  apple_music?: string;
+  youtube_music?: string;
+  tidal?: string;
+  soundcloud?: string;
+}
+
 export interface Album {
   id: string;
   title: string;
@@ -21,6 +29,7 @@ export interface Album {
   averageRating: number;
   ratingsCount: number;
   isNewRelease?: boolean;
+  streaming_links?: StreamingLinks;
 }
  
  export interface Rating {
@@ -63,8 +72,8 @@ export interface Album {
      bio: "Hip-hop head. Always hunting for new beats.",
      followers: 2100,
      following: 234,
-     ratingsCount: 890,
-   },
+      ratingsCount: 890,
+    },
  ];
  
 export const mockAlbums: Album[] = [
@@ -77,6 +86,7 @@ export const mockAlbums: Album[] = [
     genre: ["Alternative Rock", "Art Rock"],
     averageRating: 4.7,
     ratingsCount: 12453,
+    streaming_links: { spotify: "https://open.spotify.com/album/5vkqYmiPBYLaalcmjujWxK", apple_music: "https://music.apple.com/album/in-rainbows/1109714933" },
   },
   {
     id: "2",
@@ -87,6 +97,7 @@ export const mockAlbums: Album[] = [
     genre: ["R&B", "Art Pop"],
     averageRating: 4.8,
     ratingsCount: 18902,
+    streaming_links: { spotify: "https://open.spotify.com/album/3mH6qwIy9crq0I9YQbOuDf" },
   },
   {
     id: "3",
@@ -97,6 +108,7 @@ export const mockAlbums: Album[] = [
     genre: ["Hip-Hop", "Jazz Rap"],
     averageRating: 4.9,
     ratingsCount: 21340,
+    streaming_links: { spotify: "https://open.spotify.com/album/7ycBtnsMtyVbbwTfJwRjSP" },
   },
   {
     id: "4",
@@ -117,6 +129,7 @@ export const mockAlbums: Album[] = [
     genre: ["Hip-Hop", "West Coast"],
     averageRating: 4.8,
     ratingsCount: 19234,
+    streaming_links: { spotify: "https://open.spotify.com/album/4LH4d3cOWNNsVw41Gqt2kv" },
   },
   {
     id: "6",

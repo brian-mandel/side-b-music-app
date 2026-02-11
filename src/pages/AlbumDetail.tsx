@@ -5,13 +5,27 @@ import { CommentCard } from "@/components/CommentCard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, Share2, Bookmark, Play } from "lucide-react";
-import { getAlbumById, getUserById } from "@/data/mockData";
+import { ArrowLeft, Share2, Bookmark, Play, ChevronDown } from "lucide-react";
+import { getAlbumById, getUserById, type StreamingLinks } from "@/data/mockData";
 import { AlbumCover } from "@/components/AlbumCover";
 import { useState } from "react";
 import { useTakes } from "@/hooks/useTakes";
 import { ShareAlbumDialog } from "@/components/ShareAlbumDialog";
 import { toast } from "sonner";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+const PLATFORMS: { key: keyof StreamingLinks; label: string }[] = [
+  { key: "spotify", label: "Spotify" },
+  { key: "apple_music", label: "Apple Music" },
+  { key: "youtube_music", label: "YouTube Music" },
+  { key: "tidal", label: "Tidal" },
+  { key: "soundcloud", label: "SoundCloud" },
+];
 
 const AlbumDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -93,10 +107,32 @@ const AlbumDetail = () => {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <Button className="gap-2 bg-gradient-warm text-primary-foreground hover:opacity-90">
-                <Play className="w-4 h-4" />
-                Listen on Spotify
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button className="gap-2 bg-gradient-warm text-primary-foreground hover:opacity-90">
+                    <Play className="w-4 h-4" />
+                    Listen on
+                    <ChevronDown className="w-4 h-4 ml-1" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" className="bg-popover z-50">
+                  {PLATFORMS.map((platform) => (
+                    <DropdownMenuItem
+                      key={platform.key}
+                      onClick={() => {
+                        const link = album.streaming_links?.[platform.key];
+                        if (link) {
+                          window.open(link, "_blank", "noopener,noreferrer");
+                        } else {
+                          toast.info(`Link not available for ${platform.label} yet.`);
+                        }
+                      }}
+                    >
+                      {platform.label}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
               <Button variant="secondary" size="icon">
                 <Bookmark className="w-4 h-4" />
               </Button>
