@@ -5,13 +5,14 @@ import { CommentCard } from "@/components/CommentCard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, Share2, Bookmark, Play, ChevronDown } from "lucide-react";
+import { ArrowLeft, Share2, Bookmark, BookmarkCheck, Play, ChevronDown } from "lucide-react";
 import { getAlbumById, getUserById, type StreamingLinks } from "@/data/mockData";
 import { AlbumCover } from "@/components/AlbumCover";
 import { useState } from "react";
 import { useTakes } from "@/hooks/useTakes";
 import { ShareAlbumDialog } from "@/components/ShareAlbumDialog";
 import { toast } from "sonner";
+import { useSavedAlbums } from "@/hooks/useSavedAlbums";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -34,6 +35,7 @@ const AlbumDetail = () => {
   const [userRating, setUserRating] = useState(0);
   const [comment, setComment] = useState("");
   const [shareOpen, setShareOpen] = useState(false);
+  const { isSaved, toggleSave } = useSavedAlbums();
 
   if (!album) {
     return (
@@ -133,8 +135,21 @@ const AlbumDetail = () => {
                   ))}
                 </DropdownMenuContent>
               </DropdownMenu>
-              <Button variant="secondary" size="icon">
-                <Bookmark className="w-4 h-4" />
+              <Button
+                variant="secondary"
+                size="icon"
+                onClick={() => {
+                  toggleSave(album.id);
+                  toast.success(
+                    isSaved(album.id) ? "Removed from saved" : "Saved to Your albums"
+                  );
+                }}
+              >
+                {isSaved(album.id) ? (
+                  <BookmarkCheck className="w-4 h-4 text-primary" />
+                ) : (
+                  <Bookmark className="w-4 h-4" />
+                )}
               </Button>
               <Button variant="secondary" size="icon" onClick={() => setShareOpen(true)}>
                 <Share2 className="w-4 h-4" />
