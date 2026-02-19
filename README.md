@@ -1,73 +1,50 @@
-# Welcome to your Lovable project
+# Side B
 
-## Project info
+Side B is a social music rating and discovery app designed to encourage thoughtful, non-toxic takes on albums and artists. Think Letterboxd for music, but optimized for constructive engagement and future AI-powered recommendations.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Live Demo
 
-## How can I edit this code?
+[https://side-b.lovable.app/home]
 
-There are several ways of editing your application.
+## What It Does
 
-**Use Lovable**
+- Rate albums
+- Browse a social feed of recent activity
+- Track favorite records
+- Explore trending music
+- Structured rating system to reduce low-effort hot takes
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Why I Built This
 
-Changes made via Lovable will be committed automatically to this repo.
+Music discovery platforms tend to optimize for volume and virality rather than quality of engagement. I wanted to explore what a music community might look like if it rewarded structured, thoughtful interaction instead of low-effort hot takes.
 
-**Use your preferred IDE**
+Side B is an experiment in product mechanics: how ratings, feeds, and discovery systems can be designed to encourage signal over noise. It also serves as a foundation for layering AI-driven recommendations on top of explicit user preferences rather than opaque algorithmic guesses.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+This project reflects my broader interest in building products that combine structured user input, social mechanics, and intelligent recommendation systems.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Tech Stack
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
 - React
-- shadcn-ui
+- TypeScript
+- Vite
 - Tailwind CSS
+- shadcn/ui
+- Built and iterated using Lovable
 
-## How can I deploy this project?
+## Running Locally
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+```bash
+npm install
+npm run dev
 
-## Can I connect a custom domain to my Lovable project?
+## Product Roadmap
 
-Yes, you can!
+Planned evolutions for Side B:
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- Account-based user profiles with persistent rating history
+- AI-assisted album recommendations based on explicit user preferences
+- Playlist export integrations (Spotify / Apple Music)
+- Social graph features (following, activity feed personalization)
+- Structured review prompts to encourage higher-quality music discourse
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Built by Brian Mandel
