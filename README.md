@@ -36,6 +36,7 @@ This project reflects my broader interest in building products that combine stru
 ```bash
 npm install
 npm run dev
+```
 
 ## Product Roadmap
 
