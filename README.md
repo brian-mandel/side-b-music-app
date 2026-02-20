@@ -4,15 +4,52 @@ Side B is a social music rating and discovery app designed to encourage thoughtf
 
 ## Live Demo
 
-[https://side-b.lovable.app/home]
+[https://side-b.lovable.app]
 
-## What It Does
+## Product Screenshots
 
-- Rate albums
-- Browse a social feed of recent activity
-- Track favorite records
-- Explore trending music
-- Structured rating system to reduce low-effort hot takes
+### Home Feed
+Discovery layer combining trending albums, structured ratings, and social engagement in a single surface.
+
+<p align="center">
+  <img src="screenshots/home.png" width="85%">
+</p>
+
+---
+
+### Album Detail
+Aggregate ratings, discussion, and take submission.
+
+<p align="center">
+  <img src="screenshots/album.png" width="85%">
+</p>
+
+---
+
+### User Profile
+Top albums, follower graph, and recent takes.
+
+<p align="center">
+  <img src="screenshots/profile.png" width="85%">
+</p>
+
+---
+
+### Social Layer
+Follow users and engage with their takes.
+
+<p align="center">
+  <img src="screenshots/friend-profile.png" width="85%">
+</p>
+
+
+## Core Features
+
+- ⭐ Structured album rating system
+- 🗣 Social feed of user takes and discussions
+- 👤 Curated user profiles with Top 3 albums
+- 🔥 Trending and new release discovery
+- 🤝 Follow other users and engage with their activity
 
 ## Why I Built This
 
