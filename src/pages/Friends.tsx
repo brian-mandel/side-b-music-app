@@ -25,12 +25,12 @@
            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
               placeholder="Search for friends by name or username..."
-              className="pl-10 text-white placeholder:text-white/60 border-transparent focus:border-primary/50 bg-[hsl(var(--surface-search))]"
+              className="pl-10 border-border/50 focus:border-primary/50 bg-muted text-muted-foreground placeholder:text-muted-foreground/70"
             />
          </div>
  
          <Tabs defaultValue="following">
-           <TabsList className="bg-[hsl(var(--surface-search))] p-1 w-full justify-start">
+           <TabsList className="bg-muted p-1 w-full justify-start border border-border/50">
              <TabsTrigger
                value="following"
                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
