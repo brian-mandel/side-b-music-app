@@ -83,7 +83,8 @@
      --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
      --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
      --shadow-glow: 0 0 40px hsl(32 95% 55% / 0.2);
-     --chart-1: 217 10% 64%;
+      --surface-search: 216 19% 26%;
+      --chart-1: 217 10% 64%;
      --chart-2: 215 20% 65%;
      --chart-3: 215 16% 46%;
      --chart-4: 219 8% 46%;

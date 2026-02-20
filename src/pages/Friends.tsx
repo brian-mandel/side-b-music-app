@@ -23,14 +23,14 @@
          {/* Search */}
          <div className="relative mb-8">
            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-           <Input
-             placeholder="Search for friends by name or username..."
-             className="pl-10 bg-secondary border-transparent focus:border-primary/50"
-           />
+            <Input
+              placeholder="Search for friends by name or username..."
+              className="pl-10 text-white placeholder:text-white/60 border-transparent focus:border-primary/50 bg-[hsl(var(--surface-search))]"
+            />
          </div>
  
          <Tabs defaultValue="following">
-           <TabsList className="bg-secondary/50 p-1 w-full justify-start">
+           <TabsList className="bg-[hsl(var(--surface-search))] p-1 w-full justify-start">
              <TabsTrigger
                value="following"
                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"

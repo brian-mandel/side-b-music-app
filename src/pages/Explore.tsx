@@ -19,7 +19,7 @@
          </section>
  
          <Tabs defaultValue="All" className="mb-8">
-           <TabsList className="bg-secondary/50 p-1">
+           <TabsList className="bg-[hsl(var(--surface-search))] p-1">
              {genres.map((genre) => (
                <TabsTrigger
                  key={genre}
