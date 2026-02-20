@@ -1,6 +1,8 @@
 import { Home, Disc3, Users, User } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
+
+export const APP_NAME = "Side B";
 const navItems = [{
   icon: User,
   label: "You",
@@ -24,9 +26,9 @@ export function Sidebar() {
              <div className="w-10 h-10 rounded-xl bg-gradient-warm flex items-center justify-center shadow-glow">
                <Disc3 className="w-6 h-6 text-primary-foreground" />
              </div>
-             <span className="text-2xl font-display font-bold text-gradient">
-               Resonance
-             </span>
+              <span className="text-2xl font-display font-bold text-gradient">
+                {APP_NAME}
+              </span>
            </Link>
          </div>
  
